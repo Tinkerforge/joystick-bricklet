@@ -175,7 +175,6 @@ int32_t position_from_analog_value_x(int32_t value) {
 		BC->avg_sum_x = 0;
 		BC->avg_counter_x = 0;
 	}
-	BA->printf("joy x: %d\n\r", BC->avg_x);
 
 	return BC->avg_x;
 }
@@ -204,7 +203,6 @@ int32_t position_from_analog_value_y(int32_t value) {
 		BC->avg_sum_y = 0;
 		BC->avg_counter_y = 0;
 	}
-	BA->printf("joy y: %d\n\r", BC->avg_y);
 
 	return BC->avg_y;
 }
