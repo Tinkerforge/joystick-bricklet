@@ -9,10 +9,13 @@ public class ExampleFindCorners {
 	// Note: To make the example code cleaner we do not handle exceptions. Exceptions you
 	//       might normally want to catch are described in the commnents below
 	public static void main(String args[]) throws Exception {
-		IPConnection ipcon = new IPConnection(host, port); // Create connection to brickd (Can throw IOException)
+		// Create connection to brickd
+		IPConnection ipcon = new IPConnection(host, port); // Can throw IOException
 
 		BrickletJoystick joy = new BrickletJoystick(UID); // Create device object
-		ipcon.addDevice(joy); // Add device to ip connection (Can throw IPConnection.TimeoutException)
+
+		// Add device to ip connection
+		ipcon.addDevice(joy); // Can throw IPConnection.TimeoutException
 		// Don't use device before it is added to a connection
 		
 
@@ -22,7 +25,8 @@ public class ExampleFindCorners {
 		// Configure threshold for "x and y value outside of -99 and 99"
 		joy.setPositionCallbackThreshold('o', (short)-99, (short)99, (short)-99, (short)99);
 
-		// Add and implement position reached listener (called if x and y value outside of -99 and 99)
+		// Add and implement position reached listener 
+		// (called if x and y value outside of -99 and 99)
 		joy.addListener(new BrickletJoystick.PositionReachedListener() {
 			public void positionReached(short x, short y) {
 				if(x == 100 && y == 100) {
