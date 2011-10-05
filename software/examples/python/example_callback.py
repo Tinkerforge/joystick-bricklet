@@ -5,8 +5,8 @@ HOST = "localhost"
 PORT = 4223
 UID = "abcd" # Change to your UID
 
-from ip_connection import IPConnection
-from bricklet_joystick import Joystick
+from tinkerforge.ip_connection import IPConnection
+from tinkerforge.bricklet_joystick import Joystick
 
 # Callback function for pressed and released events 
 def cb_pressed():

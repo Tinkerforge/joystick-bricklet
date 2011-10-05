@@ -5,8 +5,8 @@ HOST = "localhost"
 PORT = 4223
 UID = "abcd" # Change to your UID
 
-from ip_connection import IPConnection
-from bricklet_joystick import Joystick
+from tinkerforge.ip_connection import IPConnection
+from tinkerforge.bricklet_joystick import Joystick
 
 # Callback for x and y position outside of -99, 99
 def cb_reached(x, y):
