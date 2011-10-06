@@ -1,7 +1,3 @@
-// tested with 
-// gcc -lpthread -lrt -o example_find_corners bricklet_joystick.c 
-//     ip_connection.c example_find_corners.c
-// on Ubuntu
 
 #include <stdio.h>
 
