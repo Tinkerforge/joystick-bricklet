@@ -29,6 +29,11 @@
 
 #include "joystick.h"
 
+#define BRICKLET_HARDWARE_NAME "Joystick Bricklet 1.0"
+#define BRICKLET_FIRMWARE_VERSION_MAJOR 1
+#define BRICKLET_FIRMWARE_VERSION_MINOR 0
+#define BRICKLET_FIRMWARE_VERSION_REVISION 0
+
 #define BOARD_MCK 64000000 // Frequency of brick
 
 #define PIN_SWITCH   (BS->pin2_da)
