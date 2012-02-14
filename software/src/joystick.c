@@ -26,6 +26,7 @@
 #include "bricklib/drivers/adc/adc.h"
 #include "bricklib/utility/util_definitions.h"
 #include "bricklib/bricklet/bricklet_config.h"
+#include "bricklib/utility/init.h"
 #include "bricklib/com/i2c/i2c_eeprom/i2c_eeprom_common.h"
 #include "config.h"
 
@@ -248,33 +249,35 @@ void destructor(void) {
 	adc_channel_disable(BS->adc_channel);
 }
 
-void tick(void) {
-	if(PIN_SWITCH.pio->PIO_PDSR & PIN_SWITCH.mask) {
-		if(!BC->pressed) {
-			BC->pressed = true;
-			StandardMessage sm = {
-				BS->stack_id,
-				TYPE_PRESSED,
-				sizeof(StandardMessage),
-			};
-			BA->send_blocking_with_timeout(&sm,
-		                                   sizeof(StandardMessage),
-		                                   *BA->com_current);
-		}
-	} else {
-		if(BC->pressed) {
-			BC->pressed = false;
-			StandardMessage sm = {
-				BS->stack_id,
-				TYPE_RELEASED,
-				sizeof(StandardMessage),
-			};
-			BA->send_blocking_with_timeout(&sm,
-										   sizeof(StandardMessage),
-										   *BA->com_current);
+void tick(uint8_t tick_type) {
+	if(tick_type & TICK_TASK_TYPE_MESSAGE) {
+		if(PIN_SWITCH.pio->PIO_PDSR & PIN_SWITCH.mask) {
+			if(!BC->pressed) {
+				BC->pressed = true;
+				StandardMessage sm = {
+					BS->stack_id,
+					TYPE_PRESSED,
+					sizeof(StandardMessage),
+				};
+				BA->send_blocking_with_timeout(&sm,
+											   sizeof(StandardMessage),
+											   *BA->com_current);
+			}
+		} else {
+			if(BC->pressed) {
+				BC->pressed = false;
+				StandardMessage sm = {
+					BS->stack_id,
+					TYPE_RELEASED,
+					sizeof(StandardMessage),
+				};
+				BA->send_blocking_with_timeout(&sm,
+											   sizeof(StandardMessage),
+											   *BA->com_current);
+			}
 		}
 	}
 
 
-	simple_tick();
+	simple_tick(tick_type);
 }
