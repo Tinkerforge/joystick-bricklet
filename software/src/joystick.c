@@ -131,9 +131,9 @@ int32_t analog_value_from_mc_x(int32_t value) {
 	}
 
 	PIN_ANALOG_Y.pio->PIO_CODR = PIN_ANALOG_Y.mask;
-	PIN_ANALOG_X.pio->PIO_SODR = PIN_ANALOG_X.mask;
 	BC->current_joystick_direction = JOYSTICK_DIRECTION_Y;
-
+	SLEEP_NS(200);
+	PIN_ANALOG_X.pio->PIO_SODR = PIN_ANALOG_X.mask;
 	return ret_value;
 }
 
@@ -146,8 +146,9 @@ int32_t analog_value_from_mc_y(int32_t value) {
 	}
 
 	PIN_ANALOG_X.pio->PIO_CODR = PIN_ANALOG_X.mask;
-	PIN_ANALOG_Y.pio->PIO_SODR = PIN_ANALOG_Y.mask;
 	BC->current_joystick_direction = JOYSTICK_DIRECTION_X;
+	SLEEP_NS(200);
+	PIN_ANALOG_Y.pio->PIO_SODR = PIN_ANALOG_Y.mask;
 
 	return ret_value;
 }
