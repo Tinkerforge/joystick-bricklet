@@ -32,7 +32,7 @@
 #define BRICKLET_HARDWARE_NAME "Joystick Bricklet 1.0"
 #define BRICKLET_FIRMWARE_VERSION_MAJOR 1
 #define BRICKLET_FIRMWARE_VERSION_MINOR 1
-#define BRICKLET_FIRMWARE_VERSION_REVISION 1
+#define BRICKLET_FIRMWARE_VERSION_REVISION 2
 
 #define BOARD_MCK 64000000 // Frequency of brick
 
@@ -82,8 +82,8 @@ typedef struct {
 
 	bool pressed;
 	uint8_t current_joystick_direction;
-	int8_t offset_x;
-	int8_t offset_y;
+	int16_t offset_x;
+	int16_t offset_y;
 
 	uint32_t tick;
 } BrickContext;

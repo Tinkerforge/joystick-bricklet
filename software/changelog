@@ -1,3 +1,4 @@
 1.0.0: Initial version
 1.1.0: Add support for tick types
 1.1.1: Add sleep time between joystick direction change (otherwise analog switch sometimes gets hot)
+1.1.2: Use 16bit for joystick calibration (8 bit to small for some joysticks)

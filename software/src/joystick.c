@@ -92,6 +92,7 @@ void calibrate(void) {
 	uint32_t value_y = 0;
 
 	PIN_ANALOG_X.pio->PIO_CODR = PIN_ANALOG_X.mask;
+	SLEEP_NS(200);
 	PIN_ANALOG_Y.pio->PIO_SODR = PIN_ANALOG_Y.mask;
 
 	SLEEP_MS(1);
@@ -101,6 +102,7 @@ void calibrate(void) {
 	}
 
 	PIN_ANALOG_Y.pio->PIO_CODR = PIN_ANALOG_Y.mask;
+	SLEEP_NS(200);
 	PIN_ANALOG_X.pio->PIO_SODR = PIN_ANALOG_X.mask;
 
 	SLEEP_MS(1);
@@ -112,13 +114,13 @@ void calibrate(void) {
 	BC->offset_x = ADC_MAX_VALUE/2 - value_x/100;
 	BC->offset_y = ADC_MAX_VALUE/2 - value_y/100;
 
-	uint16_t data = BC->offset_x | (BC->offset_y << 8);
+	uint32_t data = BC->offset_x | (BC->offset_y << 16);
 
     BA->bricklet_select(BS->port - 'a');
     BA->i2c_eeprom_master_write(BA->twid->pTwi,
                                 EEPROM_POSITION,
                                 (char *)&data,
-                                2);
+                                4);
     BA->bricklet_deselect(BS->port - 'a');
 }
 
@@ -224,21 +226,21 @@ void constructor(void) {
 
     BC->current_joystick_direction = JOYSTICK_DIRECTION_X;
 
-    uint16_t data;
+    uint32_t data;
 
     BA->bricklet_select(BS->port - 'a');
     BA->i2c_eeprom_master_read(BA->twid->pTwi,
                                EEPROM_POSITION,
                                (char *)&data,
-                               2);
+                               4);
     BA->bricklet_deselect(BS->port - 'a');
 
     if(data == 0xFFFF) {
     	BC->offset_x = 0;
     	BC->offset_y = 0;
     } else {
-    	BC->offset_x = data & 0xFF;
-    	BC->offset_y = data >> 8;
+    	BC->offset_x = data & 0xFFFF;
+    	BC->offset_y = data >> 16;
     }
 
     BC->pressed = false;
