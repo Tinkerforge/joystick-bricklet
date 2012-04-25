@@ -12,18 +12,17 @@ public class ExampleSimple {
 	public static void main(String args[]) throws Exception {
 		// Create connection to brickd
 		IPConnection ipcon = new IPConnection(host, port); // Can throw IOException
-
 		BrickletJoystick joy = new BrickletJoystick(UID); // Create device object
 
-		// Add device to ip connection
+		// Add device to IP connection
 		ipcon.addDevice(joy); // Can throw IPConnection.TimeoutException
 		// Don't use device before it is added to a connection
-		
+
 
 		// Get current position (returned as Position object with members x, y)
 		Position position = joy.getPosition(); // Can throw IPConnection.TimeoutException
 		System.out.println("Position: " + position);
-		
+
 		System.out.println("Press ctrl+c to exit");
 		ipcon.joinThread();
 	}

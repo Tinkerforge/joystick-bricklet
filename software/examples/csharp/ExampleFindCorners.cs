@@ -36,9 +36,8 @@ class Example
 	{
 		IPConnection ipcon = new IPConnection(HOST, PORT); // Create connection to brickd
 		BrickletJoystick joy = new BrickletJoystick(UID); // Create device object
-		ipcon.AddDevice(joy); // Add device to ip connection
+		ipcon.AddDevice(joy); // Add device to IP connection
 		// Don't use device before it is added to a connection
-
 
 		// Get threshold callbacks with a debounce time of 0.2 seconds (200ms)
 		joy.SetDebouncePeriod(200);
@@ -51,5 +50,5 @@ class Example
 
 		System.Console.WriteLine("Press ctrl+c to exit");
 		ipcon.JoinThread();
-    }
+	}
 }

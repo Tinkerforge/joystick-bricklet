@@ -21,9 +21,8 @@ class Example
 	{
 		IPConnection ipcon = new IPConnection(HOST, PORT); // Create connection to brickd
 		BrickletJoystick joy = new BrickletJoystick(UID); // Create device object
-		ipcon.AddDevice(joy); // Add device to ip connection
+		ipcon.AddDevice(joy); // Add device to IP connection
 		// Don't use device before it is added to a connection
-
 
 		// Register callbacks for pressed and released events
 		joy.RegisterCallback(new BrickletJoystick.Pressed(PressedCB));
@@ -31,5 +30,5 @@ class Example
 
 		System.Console.WriteLine("Press ctrl+c to exit");
 		ipcon.JoinThread();
-    }
+	}
 }
