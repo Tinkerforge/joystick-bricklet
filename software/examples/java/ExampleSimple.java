@@ -3,9 +3,9 @@ import com.tinkerforge.BrickletJoystick.Position;
 import com.tinkerforge.IPConnection;
 
 public class ExampleSimple {
-	private static final String host = new String("localhost");
+	private static final String host = "localhost";
 	private static final int port = 4223;
-	private static final String UID = new String("ABC"); // Change to your UID
+	private static final String UID = "ABC"; // Change to your UID
 	
 	// Note: To make the example code cleaner we do not handle exceptions. Exceptions you
 	//       might normally want to catch are described in the commnents below
