@@ -24,10 +24,10 @@ def cb_reached(x, y):
         print('Error')
 
 if __name__ == "__main__":
-    ipcon = IPConnection(HOST, PORT) # Create ip connection to brickd
+    ipcon = IPConnection(HOST, PORT) # Create IP connection to brickd
 
     js = Joystick(UID) # Create device object
-    ipcon.add_device(js) # Add device to ip connection
+    ipcon.add_device(js) # Add device to IP connection
     # Don't use device before it is added to a connection
 
     # Get threshold callbacks with a debounce time of 0.2 seconds (200ms)
