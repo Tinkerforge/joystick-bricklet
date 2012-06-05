@@ -19,7 +19,7 @@ ipcon.add_device js # Add device to IP connection
 js.set_debounce_period 200
 
 # Register position callback for x and y position outside of -99, 99
-js.register_callback BrickletJoystick::CALLBACK_POSITION_REACHED, do |x, y|
+js.register_callback(BrickletJoystick::CALLBACK_POSITION_REACHED) do |x, y|
   if x == 100 and y == 100
     puts 'Top Right'
   elsif x == -100 and y == 100

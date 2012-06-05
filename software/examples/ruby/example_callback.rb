@@ -16,10 +16,10 @@ ipcon.add_device js # Add device to IP connection
 # Don't use device before it is added to a connection
 
 # Register callbacks for pressed and released events
-js.register_callback BrickletJoystick::CALLBACK_PRESSED, do
+js.register_callback(BrickletJoystick::CALLBACK_PRESSED) do
   puts 'Pressed'
 end
-js.register_callback BrickletJoystick::CALLBACK_RELEASED, do
+js.register_callback(BrickletJoystick::CALLBACK_RELEASED) do
   puts 'Released'
 end
 
