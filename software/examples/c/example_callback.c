@@ -40,6 +40,7 @@ int main() {
 	joystick_register_callback(&js, JOYSTICK_CALLBACK_PRESSED, cb_pressed);
 	joystick_register_callback(&js, JOYSTICK_CALLBACK_RELEASED, cb_released);
 
-	printf("Press ctrl+c to close\n");
-	ipcon_join_thread(&ipcon); // Join mainloop of IP connection
+	printf("Press key to exit\n");
+	getchar();
+	ipcon_destroy(&ipcon);
 }
