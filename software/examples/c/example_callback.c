@@ -31,7 +31,7 @@ int main() {
 
 	// Add device to IP connection
 	if(ipcon_add_device(&ipcon, &js) < 0) {
-		fprintf(stderr, "Could not connect to Brick\n");
+		fprintf(stderr, "Could not connect to Bricklet\n");
 		exit(1);
 	}
 	// Don't use device before it is added to a connection
