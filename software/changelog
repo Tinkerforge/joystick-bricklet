@@ -3,3 +3,4 @@
 1.1.1: Add sleep time between joystick direction change (otherwise analog switch sometimes gets hot)
 1.1.2: Use 16bit for joystick calibration (8 bit to small for some joysticks)
 1.1.3: Use correct bool logic for "outside callback"
+1.1.4: Fix threshold period error (missing parentheses)
