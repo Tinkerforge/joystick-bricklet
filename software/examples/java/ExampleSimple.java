@@ -23,7 +23,7 @@ public class ExampleSimple {
 		Position position = joy.getPosition(); // Can throw IPConnection.TimeoutException
 		System.out.println("Position: " + position);
 
-		System.out.println("Press ctrl+c to exit");
-		ipcon.joinThread();
+		System.console().readLine("Press key to exit\n");
+		ipcon.destroy();
 	}
 }

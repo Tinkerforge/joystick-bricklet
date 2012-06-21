@@ -22,7 +22,7 @@ int main() {
 
 	// Add device to IP connection
 	if(ipcon_add_device(&ipcon, &js) < 0) {
-		fprintf(stderr, "Could not connect to Brick\n");
+		fprintf(stderr, "Could not connect to Bricklet\n");
 		exit(1);
 	}
 	// Don't use device before it is added to a connection
@@ -37,6 +37,7 @@ int main() {
 
 	printf("Position: %d, %d\n", pos_x, pos_y);
 
-	printf("Press ctrl+c to close\n");
-	ipcon_join_thread(&ipcon); // Join mainloop of IP connection
+	printf("Press key to exit\n");
+	getchar();
+	ipcon_destroy(&ipcon);
 }

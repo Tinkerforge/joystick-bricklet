@@ -48,7 +48,8 @@ class Example
 		// Configure threshold for "x and y value outside of -99 and 99"
 		joy.SetPositionCallbackThreshold('o', -99, 99, -99, 99);
 
-		System.Console.WriteLine("Press ctrl+c to exit");
-		ipcon.JoinThread();
+		System.Console.WriteLine("Press key to exit");
+		System.Console.ReadKey();
+		ipcon.Destroy();
 	}
 }

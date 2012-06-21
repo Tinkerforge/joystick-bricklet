@@ -39,22 +39,23 @@ int main() {
 
 	// Add device to IP connection
 	if(ipcon_add_device(&ipcon, &js) < 0) {
-		fprintf(stderr, "Could not connect to Brick\n");
+		fprintf(stderr, "Could not connect to Bricklet\n");
 		exit(1);
 	}
 	// Don't use device before it is added to a connection
 
-    // Get threshold callbacks with a debounce time of 0.2 seconds (200ms)
-    joystick_set_debounce_period(&js, 200);
+	// Get threshold callbacks with a debounce time of 0.2 seconds (200ms)
+	joystick_set_debounce_period(&js, 200);
 
-    // Register threshold reached callback to function cb_reached
-    joystick_register_callback(&js,
+	// Register threshold reached callback to function cb_reached
+	joystick_register_callback(&js,
 	                           JOYSTICK_CALLBACK_POSITION_REACHED,
 	                           cb_reached);
-	
-    // Configure threshold for "x and y value outside of -99 and 99" 
-    joystick_set_position_callback_threshold(&js, 'o', -99, 99, -99, 99);
 
-	printf("Press ctrl+c to close\n");
-	ipcon_join_thread(&ipcon); // Join mainloop of IP connection
+	// Configure threshold for "x and y value outside of -99 and 99"
+	joystick_set_position_callback_threshold(&js, 'o', -99, 99, -99, 99);
+
+	printf("Press key to exit\n");
+	getchar();
+	ipcon_destroy(&ipcon);
 }

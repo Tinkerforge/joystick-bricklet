@@ -28,7 +28,8 @@ class Example
 		joy.RegisterCallback(new BrickletJoystick.Pressed(PressedCB));
 		joy.RegisterCallback(new BrickletJoystick.Released(ReleasedCB));
 
-		System.Console.WriteLine("Press ctrl+c to exit");
-		ipcon.JoinThread();
+		System.Console.WriteLine("Press key to exit");
+		System.Console.ReadKey();
+		ipcon.Destroy();
 	}
 }
