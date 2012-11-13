@@ -1,5 +1,5 @@
 /* joystick-bricklet
- * Copyright (C) 2010-2011 Olaf Lüke <olaf@tinkerforge.com>
+ * Copyright (C) 2010-2012 Olaf Lüke <olaf@tinkerforge.com>
  *
  * config.h: Joystick Bricklet specific configuration
  *
@@ -29,10 +29,15 @@
 
 #include "joystick.h"
 
-#define BRICKLET_HARDWARE_NAME "Joystick Bricklet 1.0"
-#define BRICKLET_FIRMWARE_VERSION_MAJOR 1
-#define BRICKLET_FIRMWARE_VERSION_MINOR 1
-#define BRICKLET_FIRMWARE_VERSION_REVISION 4
+#define BRICKLET_FIRMWARE_VERSION_MAJOR 2
+#define BRICKLET_FIRMWARE_VERSION_MINOR 0
+#define BRICKLET_FIRMWARE_VERSION_REVISION 0
+
+#define BRICKLET_HARDWARE_VERSION_MAJOR 1
+#define BRICKLET_HARDWARE_VERSION_MINOR 1
+#define BRICKLET_HARDWARE_VERSION_REVISION 0
+
+#define BRICKLET_DEVICE_IDENTIFIER 210
 
 #define BOARD_MCK 64000000 // Frequency of brick
 
@@ -43,8 +48,8 @@
 #define JOYSTICK_DIRECTION_X 1
 #define JOYSTICK_DIRECTION_Y 2
 
-#define LOGGING_LEVEL LOGGING_DEBUG
-#define DEBUG_BRICKLET 0
+#define LOGGING_LEVEL LOGGING_NONE
+#define DEBUG_BRICKLET 1
 
 #define BRICKLET_HAS_SIMPLE_SENSOR_X2
 #define BRICKLET_NO_OFFSET

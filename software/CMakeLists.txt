@@ -15,10 +15,6 @@ SET(CMAKE_BUILD_TYPE None)
 
 INCLUDE_DIRECTORIES(
 	"${PROJECT_SOURCE_DIR}/src/"
-	"${PROJECT_SOURCE_DIR}/src/bricklib/free_rtos"
-	"${PROJECT_SOURCE_DIR}/src/bricklib/free_rtos/include"
-	"${PROJECT_SOURCE_DIR}/src/bricklib/free_rtos/portable/GCC/ARM_CM3"
-	"${PROJECT_SOURCE_DIR}/src/bricklib/drivers/"
 )
 
 # find source files

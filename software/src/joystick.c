@@ -1,5 +1,5 @@
 /* joystick-bricklet
- * Copyright (C) 2010-2011 Olaf Lüke <olaf@tinkerforge.com>
+ * Copyright (C) 2010-2012 Olaf Lüke <olaf@tinkerforge.com>
  *
  * joystick.c: Implementation of Joystick Bricklet messages
  *
@@ -22,6 +22,7 @@
 #include "joystick.h"
 
 #include "brickletlib/bricklet_entry.h"
+#include "brickletlib/bricklet_simple_x2.h"
 #include "bricklib/bricklet/bricklet_communication.h"
 #include "bricklib/drivers/adc/adc.h"
 #include "bricklib/utility/util_definitions.h"
@@ -57,37 +58,41 @@ const SimpleMessageProperty smp[] = {
 };
 
 const SimpleUnitProperty sup[] = {
-	{position_from_analog_value_x, position_from_analog_value_y, SIMPLE_SIGNEDNESS_INT, TYPE_POSITION, TYPE_POSITION_REACHED, SIMPLE_UNIT_ANALOG_VALUE}, // position
-	{analog_value_from_mc_x, analog_value_from_mc_y, SIMPLE_SIGNEDNESS_UINT, TYPE_ANALOG_VALUE, TYPE_ANALOG_VALUE_REACHED, SIMPLE_UNIT_ANALOG_VALUE}, // analog value
+	{position_from_analog_value_x, position_from_analog_value_y, SIMPLE_SIGNEDNESS_INT, FID_POSITION, FID_POSITION_REACHED, SIMPLE_UNIT_ANALOG_VALUE}, // position
+	{analog_value_from_mc_x, analog_value_from_mc_y, SIMPLE_SIGNEDNESS_UINT, FID_ANALOG_VALUE, FID_ANALOG_VALUE_REACHED, SIMPLE_UNIT_ANALOG_VALUE}, // analog value
 };
 
-void invocation(uint8_t com, uint8_t *data) {
-	switch(((SimpleStandardMessage*)data)->type) {
-		case TYPE_IS_PRESSED:
+const uint8_t smp_length = sizeof(smp);
+
+void invocation(const ComType com, const uint8_t *data) {
+	switch(((MessageHeader*)data)->fid) {
+		case FID_IS_PRESSED:
 			is_pressed(com, (StandardMessage*)data);
 			return;
-		case TYPE_CALIBRATE:
-			calibrate();
+		case FID_CALIBRATE:
+			calibrate(com, (StandardMessage*)data);
 			return;
 	}
 
 	simple_invocation(com, data);
+
+	if(((MessageHeader*)data)->fid > FID_LAST) {
+		BA->com_return_error(data, sizeof(MessageHeader), MESSAGE_ERROR_CODE_NOT_SUPPORTED, com);
+	}
 }
 
-void is_pressed(uint8_t com, StandardMessage *sm) {
-	BoolMessage bm = {
-		sm->stack_id,
-		sm->type,
-		sizeof(BoolMessage),
-		PIN_SWITCH.pio->PIO_PDSR & PIN_SWITCH.mask
-	};
+void is_pressed(const ComType com, const StandardMessage *sm) {
+	BoolMessage bm;
+	bm.header        = sm->header;
+	bm.header.length = sizeof(BoolMessage);
+	bm.value         = PIN_SWITCH.pio->PIO_PDSR & PIN_SWITCH.mask;
 
 	BA->send_blocking_with_timeout(&bm,
 	                               sizeof(BoolMessage),
 	                               com);
 }
 
-void calibrate(void) {
+void calibrate(const ComType com, const StandardMessage *sm) {
 	uint32_t value_x = 0;
 	uint32_t value_y = 0;
 
@@ -122,9 +127,11 @@ void calibrate(void) {
                                 (char *)&data,
                                 4);
     BA->bricklet_deselect(BS->port - 'a');
+
+    BA->com_return_setter(com, sm);
 }
 
-int32_t analog_value_from_mc_x(int32_t value) {
+int32_t analog_value_from_mc_x(const int32_t value) {
 	int32_t ret_value;
 	if(BC->current_joystick_direction == JOYSTICK_DIRECTION_X) {
 		ret_value = BA->adc_channel_get_data(BS->adc_channel);
@@ -136,10 +143,12 @@ int32_t analog_value_from_mc_x(int32_t value) {
 	BC->current_joystick_direction = JOYSTICK_DIRECTION_Y;
 	SLEEP_NS(200);
 	PIN_ANALOG_X.pio->PIO_SODR = PIN_ANALOG_X.mask;
+
+	BA->printf("ret x: %d\n\r", ret_value);
 	return ret_value;
 }
 
-int32_t analog_value_from_mc_y(int32_t value) {
+int32_t analog_value_from_mc_y(const int32_t value) {
 	int32_t ret_value;
 	if(BC->current_joystick_direction == JOYSTICK_DIRECTION_Y) {
 		ret_value = BA->adc_channel_get_data(BS->adc_channel);
@@ -152,15 +161,17 @@ int32_t analog_value_from_mc_y(int32_t value) {
 	SLEEP_NS(200);
 	PIN_ANALOG_Y.pio->PIO_SODR = PIN_ANALOG_Y.mask;
 
+	BA->printf("ret y: %d\n\r", ret_value);
 	return ret_value;
 }
 
-int32_t position_from_analog_value_x(int32_t value) {
+int32_t position_from_analog_value_x(const int32_t value) {
+	int32_t write_value = value;
 	if(value > MAX_ADC_VALUE/4 && value < MAX_ADC_VALUE*3/4) {
-		value += BC->offset_x;
+		write_value += BC->offset_x;
 	}
 
-	BC->avg_sum_x += value;
+	BC->avg_sum_x += write_value;
 	BC->avg_counter_x++;
 
 	if(BC->avg_counter_x == AVERAGE) {
@@ -178,17 +189,20 @@ int32_t position_from_analog_value_x(int32_t value) {
                           MAX_JOYSTICK_POSITION);
 		BC->avg_sum_x = 0;
 		BC->avg_counter_x = 0;
+
+		BA->printf("x: %d\n\r", BC->avg_x);
 	}
 
 	return BC->avg_x;
 }
 
-int32_t position_from_analog_value_y(int32_t value) {
+int32_t position_from_analog_value_y(const int32_t value) {
+	int32_t write_value = value;
 	if(value > MAX_ADC_VALUE/4 && value < MAX_ADC_VALUE*3/4) {
-		value += BC->offset_y;
+		write_value += BC->offset_y;
 	}
 
-	BC->avg_sum_y += value;
+	BC->avg_sum_y += write_value;
 	BC->avg_counter_y++;
 
 	if(BC->avg_counter_y == AVERAGE) {
@@ -206,6 +220,8 @@ int32_t position_from_analog_value_y(int32_t value) {
                           MAX_JOYSTICK_POSITION);
 		BC->avg_sum_y = 0;
 		BC->avg_counter_y = 0;
+
+		BA->printf("y: %d\n\r", BC->avg_y);
 	}
 
 	return BC->avg_y;
@@ -252,16 +268,13 @@ void destructor(void) {
 	adc_channel_disable(BS->adc_channel);
 }
 
-void tick(uint8_t tick_type) {
+void tick(const uint8_t tick_type) {
 	if(tick_type & TICK_TASK_TYPE_MESSAGE) {
 		if(PIN_SWITCH.pio->PIO_PDSR & PIN_SWITCH.mask) {
 			if(!BC->pressed) {
 				BC->pressed = true;
-				StandardMessage sm = {
-					BS->stack_id,
-					TYPE_PRESSED,
-					sizeof(StandardMessage),
-				};
+				StandardMessage sm;
+				BA->com_make_default_header(&sm, BS->uid, sizeof(StandardMessage), FID_PRESSED);
 				BA->send_blocking_with_timeout(&sm,
 											   sizeof(StandardMessage),
 											   *BA->com_current);
@@ -269,11 +282,8 @@ void tick(uint8_t tick_type) {
 		} else {
 			if(BC->pressed) {
 				BC->pressed = false;
-				StandardMessage sm = {
-					BS->stack_id,
-					TYPE_RELEASED,
-					sizeof(StandardMessage),
-				};
+				StandardMessage sm;
+				BA->com_make_default_header(&sm, BS->uid, sizeof(StandardMessage), FID_RELEASED);
 				BA->send_blocking_with_timeout(&sm,
 											   sizeof(StandardMessage),
 											   *BA->com_current);
