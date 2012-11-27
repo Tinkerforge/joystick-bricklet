@@ -141,10 +141,9 @@ int32_t analog_value_from_mc_x(const int32_t value) {
 
 	PIN_ANALOG_Y.pio->PIO_CODR = PIN_ANALOG_Y.mask;
 	BC->current_joystick_direction = JOYSTICK_DIRECTION_Y;
-	SLEEP_NS(200);
+	SLEEP_NS(500);
 	PIN_ANALOG_X.pio->PIO_SODR = PIN_ANALOG_X.mask;
 
-	BA->printf("ret x: %d\n\r", ret_value);
 	return ret_value;
 }
 
@@ -158,10 +157,9 @@ int32_t analog_value_from_mc_y(const int32_t value) {
 
 	PIN_ANALOG_X.pio->PIO_CODR = PIN_ANALOG_X.mask;
 	BC->current_joystick_direction = JOYSTICK_DIRECTION_X;
-	SLEEP_NS(200);
+	SLEEP_NS(500);
 	PIN_ANALOG_Y.pio->PIO_SODR = PIN_ANALOG_Y.mask;
 
-	BA->printf("ret y: %d\n\r", ret_value);
 	return ret_value;
 }
 
@@ -189,8 +187,6 @@ int32_t position_from_analog_value_x(const int32_t value) {
                           MAX_JOYSTICK_POSITION);
 		BC->avg_sum_x = 0;
 		BC->avg_counter_x = 0;
-
-		BA->printf("x: %d\n\r", BC->avg_x);
 	}
 
 	return BC->avg_x;
@@ -220,8 +216,6 @@ int32_t position_from_analog_value_y(const int32_t value) {
                           MAX_JOYSTICK_POSITION);
 		BC->avg_sum_y = 0;
 		BC->avg_counter_y = 0;
-
-		BA->printf("y: %d\n\r", BC->avg_y);
 	}
 
 	return BC->avg_y;
