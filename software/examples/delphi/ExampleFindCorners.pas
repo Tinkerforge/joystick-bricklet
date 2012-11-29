@@ -12,7 +12,7 @@ type
     ipcon: TIPConnection;
     js: TBrickletJoystick;
   public
-    procedure ReachedCB(const x: smallint; const y: smallint);
+    procedure ReachedCB(sender: TObject; const x: smallint; const y: smallint);
     procedure Execute;
   end;
 
@@ -25,7 +25,7 @@ var
   e: TExample;
 
 { Callback for x and y position outside of -99, 99 }
-procedure TExample.ReachedCB(const x: smallint; const y: smallint);
+procedure TExample.ReachedCB(sender: TObject; const x: smallint; const y: smallint);
 begin
   if ((x = 100) and (y = 100)) then begin
     WriteLn('Top Right');
@@ -48,15 +48,15 @@ end;
 
 procedure TExample.Execute;
 begin
-  { Create IP connection to brickd }
-  ipcon := TIPConnection.Create(HOST, PORT);
+  { Create IP connection }
+  ipcon := TIPConnection.Create();
 
   { Create device object }
-  js := TBrickletJoystick.Create(UID);
+  js := TBrickletJoystick.Create(UID, ipcon);
 
-  { Add device to IP connection }
-  ipcon.AddDevice(js);
-  { Don't use device before it is added to a connection }
+  { Connect to brickd }
+  ipcon.Connect(HOST, PORT);
+  { Don't use device before ipcon is connected }
 
   { Get threshold callbacks with a debounce time of 0.2 seconds (200ms) }
   js.SetDebouncePeriod(200);
@@ -69,7 +69,6 @@ begin
 
   WriteLn('Press key to exit');
   ReadLn;
-  ipcon.Destroy;
 end;
 
 begin
