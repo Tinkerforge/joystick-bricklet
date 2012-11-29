@@ -21,11 +21,11 @@ function cb_released()
     echo "Released\n";
 }
 
-$ipcon = new IPConnection($host, $port); // Create IP connection to brickd
-$js = new BrickletJoystick($uid); // Create device object
+$ipcon = new IPConnection(); // Create IP connection
+$js = new BrickletJoystick($uid, $ipcon); // Create device object
 
-$ipcon->addDevice($js); // Add device to IP connection
-// Don't use device before it is added to a connection
+$ipcon->connect($host, $port); // Connect to brickd
+// Don't use device before ipcon is connected
 
 // Register callbacks for pressed and released events
 $js->registerCallback(BrickletJoystick::CALLBACK_PRESSED, 'cb_pressed');
