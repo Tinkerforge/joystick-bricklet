@@ -10,10 +10,11 @@ HOST = 'localhost'
 PORT = 4223
 UID = '82w' # Change to your UID
 
-ipcon = IPConnection.new HOST, PORT # Create IP connection to brickd
-js = BrickletJoystick.new UID # Create device object
-ipcon.add_device js # Add device to IP connection
-# Don't use device before it is added to a connection
+ipcon = IPConnection.new # Create IP connection
+js = BrickletJoystick.new UID, ipcon # Create device object
+
+ipcon.connect HOST, PORT # Connect to brickd
+# Don't use device before ipcon is connected
 
 # Get threshold callbacks with a debounce time of 0.2 seconds (200ms)
 js.set_debounce_period 200
@@ -40,4 +41,3 @@ js.set_position_callback_threshold 'o', -99, 99, -99, 99
 
 puts 'Press key to exit'
 $stdin.gets
-ipcon.destroy
