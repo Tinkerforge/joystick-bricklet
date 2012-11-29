@@ -16,15 +16,14 @@ def cb_released():
     print('Released')
 
 if __name__ == "__main__":
-    ipcon = IPConnection(HOST, PORT) # Create IP connection to brickd
+    ipcon = IPConnection() # Create IP connection
+    js = Joystick(UID, ipcon) # Create device object
 
-    js = Joystick(UID) # Create device object
-    ipcon.add_device(js) # Add device to IP connection
-    # Don't use device before it is added to a connection
+    ipcon.connect(HOST, PORT) # Connect to brickd
+    # Don't use device before ipcon is connected
 
     # Register callbacks for pressed and released events
     js.register_callback(js.CALLBACK_PRESSED, cb_pressed)
     js.register_callback(js.CALLBACK_RELEASED, cb_released)
 
     raw_input('Press key to exit\n') # Use input() in Python 3
-    ipcon.destroy()
