@@ -9,7 +9,7 @@
 #define UID "abcd" // Change to your UID
 
 // Callback for x and y position outside of -99, 99
-void cb_reached(int16_t x, int16_t y) {
+void cb_reached(int16_t x, int16_t y, void *user_data) {
 	if(x == 100 && y == 100) {
 		printf("Top Right\n");
 	} else if(x == -100 && y == 100) {
@@ -26,23 +26,20 @@ void cb_reached(int16_t x, int16_t y) {
 }
 
 int main() {
-	// Create IP connection to brickd
+	// Create IP connection
 	IPConnection ipcon;
-	if(ipcon_create(&ipcon, HOST, PORT) < 0) {
-		fprintf(stderr, "Could not create connection\n");
-		exit(1);
-	}
+	ipcon_create(&ipcon);
 
 	// Create device object
 	Joystick js;
-	joystick_create(&js, UID); 
+	joystick_create(&js, UID, &ipcon); 
 
-	// Add device to IP connection
-	if(ipcon_add_device(&ipcon, &js) < 0) {
-		fprintf(stderr, "Could not connect to Bricklet\n");
+	// Connect to brickd
+	if(ipcon_connect(&ipcon, HOST, PORT) < 0) {
+		fprintf(stderr, "Could not connect\n");
 		exit(1);
 	}
-	// Don't use device before it is added to a connection
+	// Don't use device before ipcon is connected
 
 	// Get threshold callbacks with a debounce time of 0.2 seconds (200ms)
 	joystick_set_debounce_period(&js, 200);
@@ -50,7 +47,8 @@ int main() {
 	// Register threshold reached callback to function cb_reached
 	joystick_register_callback(&js,
 	                           JOYSTICK_CALLBACK_POSITION_REACHED,
-	                           cb_reached);
+	                           cb_reached,
+							   NULL);
 
 	// Configure threshold for "x and y value outside of -99 and 99"
 	joystick_set_position_callback_threshold(&js, 'o', -99, 99, -99, 99);
