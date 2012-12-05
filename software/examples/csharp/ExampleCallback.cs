@@ -7,29 +7,28 @@ class Example
 	private static string UID = "ABC"; // Change to your UID
 
 	// Callback functions for pressed and released events
-	static void PressedCB()
+	static void PressedCB(object sender)
 	{
 		System.Console.WriteLine("Pressed");
 	}
 
-	static void ReleasedCB()
+	static void ReleasedCB(object sender)
 	{
 		System.Console.WriteLine("Released");
 	}
 
 	static void Main() 
 	{
-		IPConnection ipcon = new IPConnection(HOST, PORT); // Create connection to brickd
-		BrickletJoystick joy = new BrickletJoystick(UID); // Create device object
-		ipcon.AddDevice(joy); // Add device to IP connection
-		// Don't use device before it is added to a connection
+		IPConnection ipcon = new IPConnection(); // Create IP connection
+		BrickletJoystick joy = new BrickletJoystick(UID, ipcon); // Create device object
+
+		ipcon.Connect(HOST, PORT); // Connect to brickd
+		// Don't use device before ipcon is connected
 
 		// Register callbacks for pressed and released events
-		joy.RegisterCallback(new BrickletJoystick.Pressed(PressedCB));
-		joy.RegisterCallback(new BrickletJoystick.Released(ReleasedCB));
+		joy.Pressed += PressedCB;
+		joy.Released += ReleasedCB;
 
 		System.Console.WriteLine("Press key to exit");
-		System.Console.ReadKey();
-		ipcon.Destroy();
 	}
 }
