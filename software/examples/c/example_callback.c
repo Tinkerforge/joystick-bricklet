@@ -10,10 +10,14 @@
 
 // Callback function for pressed and released events 
 void cb_pressed(void *user_data) {
+	(void)user_data; // avoid unused parameter warning
+
 	printf("Pressed\n");
 }
 
 void cb_released(void *user_data) {
+	(void)user_data; // avoid unused parameter warning
+
 	printf("Released\n");
 }
 
@@ -36,13 +40,13 @@ int main() {
 	// Register callbacks for pressed and released events
 	joystick_register_callback(&js, 
 	                           JOYSTICK_CALLBACK_PRESSED, 
-							   cb_pressed,
-							   NULL);
+	                           cb_pressed,
+	                           NULL);
 
 	joystick_register_callback(&js, 
 	                           JOYSTICK_CALLBACK_RELEASED, 
-							   cb_released,
-							   NULL);
+	                           cb_released,
+	                           NULL);
 
 	printf("Press key to exit\n");
 	getchar();

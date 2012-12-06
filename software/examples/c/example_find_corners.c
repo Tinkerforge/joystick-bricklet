@@ -10,6 +10,8 @@
 
 // Callback for x and y position outside of -99, 99
 void cb_reached(int16_t x, int16_t y, void *user_data) {
+	(void)user_data; // avoid unused parameter warning
+
 	if(x == 100 && y == 100) {
 		printf("Top Right\n");
 	} else if(x == -100 && y == 100) {
@@ -48,7 +50,7 @@ int main() {
 	joystick_register_callback(&js,
 	                           JOYSTICK_CALLBACK_POSITION_REACHED,
 	                           cb_reached,
-							   NULL);
+	                           NULL);
 
 	// Configure threshold for "x and y value outside of -99 and 99"
 	joystick_set_position_callback_threshold(&js, 'o', -99, 99, -99, 99);
