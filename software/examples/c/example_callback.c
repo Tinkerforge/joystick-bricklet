@@ -40,12 +40,12 @@ int main() {
 	// Register callbacks for pressed and released events
 	joystick_register_callback(&js, 
 	                           JOYSTICK_CALLBACK_PRESSED, 
-	                           cb_pressed,
+	                           (void *)cb_pressed,
 	                           NULL);
 
 	joystick_register_callback(&js, 
 	                           JOYSTICK_CALLBACK_RELEASED, 
-	                           cb_released,
+	                           (void *)cb_released,
 	                           NULL);
 
 	printf("Press key to exit\n");

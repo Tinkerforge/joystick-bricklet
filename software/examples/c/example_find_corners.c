@@ -49,7 +49,7 @@ int main() {
 	// Register threshold reached callback to function cb_reached
 	joystick_register_callback(&js,
 	                           JOYSTICK_CALLBACK_POSITION_REACHED,
-	                           cb_reached,
+	                           (void *)cb_reached,
 	                           NULL);
 
 	// Configure threshold for "x and y value outside of -99 and 99"
