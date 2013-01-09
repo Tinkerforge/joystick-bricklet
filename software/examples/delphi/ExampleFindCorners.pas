@@ -12,7 +12,7 @@ type
     ipcon: TIPConnection;
     js: TBrickletJoystick;
   public
-    procedure ReachedCB(sender: TObject; const x: smallint; const y: smallint);
+    procedure ReachedCB(sender: TBrickletJoystick; const x: smallint; const y: smallint);
     procedure Execute;
   end;
 
@@ -25,7 +25,7 @@ var
   e: TExample;
 
 { Callback for x and y position outside of -99, 99 }
-procedure TExample.ReachedCB(sender: TObject; const x: smallint; const y: smallint);
+procedure TExample.ReachedCB(sender: TBrickletJoystick; const x: smallint; const y: smallint);
 begin
   if ((x = 100) and (y = 100)) then begin
     WriteLn('Top Right');

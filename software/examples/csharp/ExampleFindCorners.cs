@@ -7,7 +7,7 @@ class Example
 	private static string UID = "ABC"; // Change to your UID
 
 	// Callback for x and y position outside of -99, 99
-	static void ReachedCB(object sender, short x, short y)
+	static void ReachedCB(BrickletJoystick sender, short x, short y)
 	{
 		if(x == 100 && y == 100)
 		{

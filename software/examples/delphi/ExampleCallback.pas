@@ -12,8 +12,8 @@ type
     ipcon: TIPConnection;
     js: TBrickletJoystick;
   public
-    procedure PressedCB(sender: TObject);
-    procedure ReleasedCB(sender: TObject);
+    procedure PressedCB(sender: TBrickletJoystick);
+    procedure ReleasedCB(sender: TBrickletJoystick);
     procedure Execute;
   end;
 
@@ -26,12 +26,12 @@ var
   e: TExample;
 
 { Callback function for pressed and released events }
-procedure TExample.PressedCB(sender: TObject);
+procedure TExample.PressedCB(sender: TBrickletJoystick);
 begin
   WriteLn('Pressed');
 end;
 
-procedure TExample.ReleasedCB(sender: TObject);
+procedure TExample.ReleasedCB(sender: TBrickletJoystick);
 begin
   WriteLn('Released');
 end;
