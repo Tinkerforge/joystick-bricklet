@@ -23,7 +23,7 @@ public class ExampleFindCorners {
 
 		// Add and implement position reached listener 
 		// (called if x and y value outside of -99 and 99)
-		joy.addListener(new BrickletJoystick.PositionReachedListener() {
+		joy.addPositionReachedListener(new BrickletJoystick.PositionReachedListener() {
 			public void positionReached(short x, short y) {
 				if(x == 100 && y == 100) {
 					System.out.println("Top Right");

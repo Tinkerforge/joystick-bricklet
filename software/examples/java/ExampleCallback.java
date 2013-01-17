@@ -16,12 +16,12 @@ public class ExampleCallback {
 		// Don't use device before ipcon is connected
 
 		// Add and implement listener for pressed and released events
-		joy.addListener(new BrickletJoystick.PressedListener() {
+		joy.addPressedListener(new BrickletJoystick.PressedListener() {
 			public void pressed() {
 				System.out.println("Pressed");
 			}
 		});
-		joy.addListener(new BrickletJoystick.ReleasedListener() {
+		joy.addReleasedListener(new BrickletJoystick.ReleasedListener() {
 			public void released() {
 				System.out.println("Released");
 			}
