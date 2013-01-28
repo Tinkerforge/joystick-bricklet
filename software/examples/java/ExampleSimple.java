@@ -17,7 +17,7 @@ public class ExampleSimple {
 		// Don't use device before ipcon is connected
 
 		// Get current position (returned as Position object with members x, y)
-		Position position = joy.getPosition(); // Can throw IPConnection.TimeoutException
+		Position position = joy.getPosition(); // Can throw com.tinkerforge.TimeoutException
 		System.out.println("Position: " + position);
 
 		System.console().readLine("Press key to exit\n");
