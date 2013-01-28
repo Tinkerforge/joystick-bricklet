@@ -24,26 +24,22 @@ const
 var
   e: TExample;
 
-{ Callback for x and y position outside of -99, 99 }
+{ Callback for x and y position outside of [-99..99] }
 procedure TExample.ReachedCB(sender: TBrickletJoystick; const x: smallint; const y: smallint);
 begin
-  if ((x = 100) and (y = 100)) then begin
-    WriteLn('Top Right');
+  if (y = 100) then begin
+    WriteLn('Top');
   end
-  else if ((x = -100) and (y = 100)) then begin
-    WriteLn('Top Left');
-  end
-  else if ((x = -100) and (y = -100)) then begin
-    WriteLn('Bottom Left');
-  end
-  else if ((x = 100) and (y = -100)) then begin
-    WriteLn('Bottom Right');
-  end
-  else begin
-    { This can't happen, the threshold is configured to:
-      "outside of -99, 99" }
-    WriteLn('Error');
+  else if (y = -100) then begin
+    WriteLn('Bottom');
   end;
+  if (x = 100) then begin
+    WriteLn('Right');
+  end
+  else if (x = -100) then begin
+    WriteLn('Left');
+  end;
+  WriteLn('');
 end;
 
 procedure TExample.Execute;
@@ -64,7 +60,7 @@ begin
   { Register threshold reached callback to procedure ReachedCB }
   js.OnPositionReached := {$ifdef FPC}@{$endif}ReachedCB;
 
-  { Configure threshold for "x and y value outside of -99 and 99" }
+  { Configure threshold for "x or y value outside of [-99..99]" }
   js.SetPositionCallbackThreshold('o', -99, 99, -99, 99);
 
   WriteLn('Press key to exit');

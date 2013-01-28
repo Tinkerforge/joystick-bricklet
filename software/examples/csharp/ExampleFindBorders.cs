@@ -6,33 +6,31 @@ class Example
 	private static int PORT = 4223;
 	private static string UID = "ABC"; // Change to your UID
 
-	// Callback for x and y position outside of -99, 99
+	// Callback for x or y position outside of [-99..99]
 	static void ReachedCB(BrickletJoystick sender, short x, short y)
 	{
-		if(x == 100 && y == 100)
+		if(y == 100)
 		{
-			System.Console.WriteLine("Top Right");
+			System.Console.WriteLine("Top");
 		}
-		else if(x == -100 && y == 100)
+		else if(y == -100)
 		{
-			System.Console.WriteLine("Top Left");
+			System.Console.WriteLine("Bottom");
 		}
-		else if(x == -100 && y == -100)
+
+		if(x == 100)
 		{
-			System.Console.WriteLine("Bottom Left");
+			System.Console.WriteLine("Right");
 		}
-		else if(x == 100 && y == -100)
+		else if(x == -100)
 		{
-			System.Console.WriteLine("Bottom Right");
+			System.Console.WriteLine("Left");
 		}
-		else
-		{
-			// This can't happen, the threshold is configured to: "outside of -99, 99"
-			System.Console.WriteLine("Error");
-		}
+
+		System.Console.WriteLine("");
 	}
 
-	static void Main() 
+	static void Main()
 	{
 		IPConnection ipcon = new IPConnection(); // Create IP connection
 		BrickletJoystick joy = new BrickletJoystick(UID, ipcon); // Create device object
@@ -46,7 +44,7 @@ class Example
 		// Register threshold reached callback to function ReachedCB
 		joy.PositionReached += ReachedCB;
 
-		// Configure threshold for "x and y value outside of -99 and 99"
+		// Configure threshold for "x or y value outside of [-99..99]"
 		joy.SetPositionCallbackThreshold('o', -99, 99, -99, 99);
 
 		System.Console.WriteLine("Press key to exit");
