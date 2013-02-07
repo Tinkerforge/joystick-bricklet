@@ -27,3 +27,4 @@ if __name__ == "__main__":
     js.register_callback(js.CALLBACK_RELEASED, cb_released)
 
     raw_input('Press key to exit\n') # Use input() in Python 3
+    ipcon.disconnect()

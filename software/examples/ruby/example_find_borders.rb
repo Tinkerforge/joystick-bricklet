@@ -41,3 +41,4 @@ js.set_position_callback_threshold 'o', -99, 99, -99, 99
 
 puts 'Press key to exit'
 $stdin.gets
+ipcon.disconnect

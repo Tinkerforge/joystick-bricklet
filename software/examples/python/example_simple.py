@@ -21,3 +21,4 @@ if __name__ == "__main__":
     print('Position: ' + str(position))
 
     raw_input('Press key to exit\n') # Use input() in Python 3
+    ipcon.disconnect()

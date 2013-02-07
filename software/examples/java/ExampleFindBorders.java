@@ -42,5 +42,6 @@ public class ExampleFindBorders {
 		});
 
 		System.console().readLine("Press key to exit\n");
+		ipcon.disconnect();
 	}
 }

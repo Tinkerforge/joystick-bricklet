@@ -39,3 +39,4 @@ if __name__ == "__main__":
     js.set_position_callback_threshold('o', -99, 99, -99, 99)
 
     raw_input('Press key to exit\n') # Use input() in Python 3
+    ipcon.disconnect()
