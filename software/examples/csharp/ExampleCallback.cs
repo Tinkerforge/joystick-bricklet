@@ -30,5 +30,7 @@ class Example
 		joy.Released += ReleasedCB;
 
 		System.Console.WriteLine("Press key to exit");
+		System.Console.ReadKey();
+		ipcon.Disconnect();
 	}
 }

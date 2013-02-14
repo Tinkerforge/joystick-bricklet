@@ -8,23 +8,23 @@
 #define PORT 4223
 #define UID "abcd" // Change to your UID
 
-// Callback for x and y position outside of -99, 99
+// Callback for x or y position outside of [-99..99]
 void cb_reached(int16_t x, int16_t y, void *user_data) {
 	(void)user_data; // avoid unused parameter warning
 
-	if(x == 100 && y == 100) {
-		printf("Top Right\n");
-	} else if(x == -100 && y == 100) {
-		printf("Top Left\n");
-	} else if(x == -100 && y == -100) {
-		printf("Bottom Left\n");
-	} else if(x == 100 && y == -100) {
-		printf("Bottom Right\n");
-	} else {
-		// This can't happen, the threshold is configured to:
-		// "outside of -99, 99"
-		printf("Error");
+	if(y == 100) {
+		printf("Top\n");
+	} else if(y == -100) {
+		printf("Bottom\n");
 	}
+
+	if(x == 100) {
+		printf("Right\n");
+	} else if(x == -100) {
+		printf("Left\n");
+	}
+
+	printf("\n");
 }
 
 int main() {
@@ -34,7 +34,7 @@ int main() {
 
 	// Create device object
 	Joystick js;
-	joystick_create(&js, UID, &ipcon); 
+	joystick_create(&js, UID, &ipcon);
 
 	// Connect to brickd
 	if(ipcon_connect(&ipcon, HOST, PORT) < 0) {
@@ -52,10 +52,10 @@ int main() {
 	                           (void *)cb_reached,
 	                           NULL);
 
-	// Configure threshold for "x and y value outside of -99 and 99"
+	// Configure threshold for "x or y value outside of [-99..99]"
 	joystick_set_position_callback_threshold(&js, 'o', -99, 99, -99, 99);
 
 	printf("Press key to exit\n");
 	getchar();
-	ipcon_destroy(&ipcon);
+	ipcon_destroy(&ipcon); // Calls ipcon_disconnect internally
 }

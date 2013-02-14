@@ -21,5 +21,6 @@ public class ExampleSimple {
 		System.out.println("Position: " + position);
 
 		System.console().readLine("Press key to exit\n");
+		ipcon.disconnect();
 	}
 }
