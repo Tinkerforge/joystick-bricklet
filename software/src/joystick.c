@@ -33,7 +33,7 @@
 
 #define MAX_ADC_VALUE ((1  << 12) - 1)
 #define MAX_JOYSTICK_POSITION 200
-#define AVERAGE 10
+#define AVERAGE 2
 
 #define SIMPLE_UNIT_POSITION 0
 #define SIMPLE_UNIT_ANALOG_VALUE 1
