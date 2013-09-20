@@ -2,6 +2,9 @@
 // This example is Windows only. Link to user32.lib in addition to ws2_32.lib
 
 #include <stdio.h>
+
+#ifdef _WIN32
+
 #include <windows.h>
 
 #include "ip_connection.h"
@@ -96,3 +99,13 @@ int main() {
 
 	return 0;
 }
+
+#else
+
+int main() {
+	printf("This example is Windows only!\n");
+
+	return 0;
+}
+
+#endif
