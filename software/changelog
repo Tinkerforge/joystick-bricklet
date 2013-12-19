@@ -7,3 +7,4 @@
 2.0.0: Support for protocol 2.0
 2.0.1: Fix timeout in threshold callback functions (through brickletlib)
 2.0.2: Increase analog value integration time (through brickletlib) and decrease averaging to allow more stable joystick values if Joystick is used over WiFi.
+2.0.3: Fix wrong length for GetDebounce packet (through brickletlib)
