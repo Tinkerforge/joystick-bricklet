@@ -222,6 +222,8 @@ int32_t position_from_analog_value_y(const int32_t value) {
 }
 
 void constructor(void) {
+	_Static_assert(sizeof(BrickContext) <= BRICKLET_CONTEXT_MAX_SIZE, "BrickContext too big");
+
 	adc_channel_enable(BS->adc_channel);
 
 	PIN_SWITCH.type = PIO_INPUT;
