@@ -6,9 +6,9 @@ require_once('Tinkerforge/BrickletJoystick.php');
 use Tinkerforge\IPConnection;
 use Tinkerforge\BrickletJoystick;
 
-$host = 'localhost';
-$port = 4223;
-$uid = '82w'; // Change to your UID
+const HOST = 'localhost';
+const PORT = 4223;
+const UID = '82w'; // Change to your UID
 
 // Callback function for pressed and released events 
 function cb_pressed()
@@ -22,9 +22,9 @@ function cb_released()
 }
 
 $ipcon = new IPConnection(); // Create IP connection
-$js = new BrickletJoystick($uid, $ipcon); // Create device object
+$js = new BrickletJoystick(UID, $ipcon); // Create device object
 
-$ipcon->connect($host, $port); // Connect to brickd
+$ipcon->connect(HOST, PORT); // Connect to brickd
 // Don't use device before ipcon is connected
 
 // Register callbacks for pressed and released events
