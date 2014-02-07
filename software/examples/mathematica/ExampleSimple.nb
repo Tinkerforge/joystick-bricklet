@@ -1,0 +1,103 @@
+(*CacheID: 234*)
+(* Internal cache information:
+NotebookFileLineBreakTest
+NotebookFileLineBreakTest
+NotebookDataPosition[         0,          0]
+NotebookDataLength[      3707,        102]
+NotebookOptionsPosition[      3276,         81]
+NotebookOutlinePosition[      3614,         96]
+CellTagsIndexPosition[      3571,         93]
+WindowFrame->Normal*)
+
+(* Beginning of Notebook Content *)
+Notebook[{
+Cell[BoxData[{
+ RowBox[{"Needs", "[", "\"\<NETLink`\>\"", "]"}], "\[IndentingNewLine]", 
+ RowBox[{"LoadNETAssembly", "[", 
+  RowBox[{"\"\<Tinkerforge\>\"", ",", 
+   RowBox[{
+    RowBox[{"NotebookDirectory", "[", "]"}], "<>", "\"\<../..\>\""}]}], 
+  "]"}]}], "Input",
+ CellChangeTimes->{{3.600175052949191*^9, 3.600175066601799*^9}, 
+   3.600175102142559*^9, {3.6001753172765293`*^9, 3.600175317946432*^9}, {
+   3.600500538026902*^9, 3.600500561851948*^9}, {3.600506097634747*^9, 
+   3.600506099012146*^9}, 3.600506136278721*^9}],
+
+Cell[BoxData[{
+ RowBox[{"host", "=", "\"\<localhost\>\""}], "\[IndentingNewLine]", 
+ RowBox[{"port", "=", "4223"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"uid", "=", "\"\<dmG\>\""}], 
+  RowBox[{"(*", " ", 
+   RowBox[{"Change", " ", "to", " ", "your", " ", "UID"}], " ", "*)"}], 
+  "\[IndentingNewLine]", "\[IndentingNewLine]", 
+  RowBox[{"(*", " ", 
+   RowBox[{
+   "Create", " ", "IPConnection", " ", "and", " ", "device", " ", "object"}], 
+   " ", "*)"}]}], "\[IndentingNewLine]", 
+ RowBox[{"ipcon", "=", 
+  RowBox[{"NETNew", "[", "\"\<Tinkerforge.IPConnection\>\"", "]"}]}], "\n", 
+ RowBox[{"js", "=", 
+  RowBox[{"NETNew", "[", 
+   RowBox[{"\"\<Tinkerforge.BrickletJoystick\>\"", ",", "uid", ",", "ipcon"}],
+    "]"}]}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"ipcon", "@", 
+   RowBox[{"Connect", "[", 
+    RowBox[{"host", ",", "port"}], "]"}]}], "\n"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"x", "=", "0"}], ";", 
+   RowBox[{"y", "=", "0"}]}], "\[IndentingNewLine]", "\n", 
+  RowBox[{"(*", " ", 
+   RowBox[{"Get", " ", "current", " ", "position", " ", 
+    RowBox[{"(", 
+     RowBox[{"x", " ", "and", " ", "y", " ", "value"}], ")"}]}], " ", 
+   "*)"}]}], "\[IndentingNewLine]", 
+ RowBox[{"js", "@", 
+  RowBox[{"GetPosition", "[", 
+   RowBox[{"x", ",", "y"}], "]"}]}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"Print", "[", 
+   RowBox[{"\"\<Position: \>\"", "<>", 
+    RowBox[{"ToString", "[", "x", "]"}], "<>", "\"\<, \>\"", "<>", 
+    RowBox[{"ToString", "[", "y", "]"}]}], "]"}], "\[IndentingNewLine]", 
+  "\[IndentingNewLine]", 
+  RowBox[{"(*", " ", 
+   RowBox[{"Clean", " ", "up"}], " ", "*)"}]}], "\[IndentingNewLine]", 
+ RowBox[{"ipcon", "@", 
+  RowBox[{"Disconnect", "[", "]"}]}], "\[IndentingNewLine]", 
+ RowBox[{"ReleaseNETObject", "[", "js", "]"}], "\[IndentingNewLine]", 
+ RowBox[{"ReleaseNETObject", "[", "ipcon", "]"}]}], "Input",
+ CellChangeTimes->CompressedData["
+1:eJxTTMoPSmViYGCQAGIQfSH+k8nMS68cDZKMTEF0n++teBCt+vJsEog++G9i
+Ooj2uL+yCETfDbAqB9FK2vaTQDQL2405INr4jfFcEL1BTrRmFpDuXloMptMm
+XGsG019egensHQvfLADSfDu3vwXR92fyfAXR83JefQfRYZNi/oDoF9czwLTh
+9OVKC0HicrNVQHSeBIs2iP6qG6YHojM8XpmC6GOzf4Lpe/NqJ4Hogn3uk0F0
+uPhM570g+51v+IFo97nnwkC00Z2YCBA9ravL5jCQ9p14wQ5E531VYDgFMm9H
+PD+IntmXLAait/7llADR7LlWNzMuA/WFi9wC0afs97wC0TmbroLpY1y7pmQD
+6Vfv9s0G0dpvOJaC6IwHM5aD6BmnM1WfAumtnd2aIBoApCzgqw==
+  "]]
+},
+WindowSize->{1521, 867},
+WindowMargins->{{288, Automatic}, {68, Automatic}},
+FrontEndVersion->"9.0 for Linux x86 (64-bit) (February 7, 2013)",
+StyleDefinitions->"Default.nb"
+]
+(* End of Notebook Content *)
+
+(* Internal cache information *)
+(*CellTagsOutline
+CellTagsIndex->{}
+*)
+(*CellTagsIndex
+CellTagsIndex->{}
+*)
+(*NotebookFileOutline
+Notebook[{
+Cell[400, 13, 528, 10, 55, "Input"],
+Cell[931, 25, 2341, 54, 429, "Input"]
+}
+]
+*)
+

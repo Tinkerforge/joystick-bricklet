@@ -1,0 +1,180 @@
+(*CacheID: 234*)
+(* Internal cache information:
+NotebookFileLineBreakTest
+NotebookFileLineBreakTest
+NotebookDataPosition[         0,          0]
+NotebookDataLength[      7404,        179]
+NotebookOptionsPosition[      6972,        158]
+NotebookOutlinePosition[      7310,        173]
+CellTagsIndexPosition[      7267,        170]
+WindowFrame->Normal*)
+
+(* Beginning of Notebook Content *)
+Notebook[{
+Cell[BoxData[{
+ RowBox[{"Needs", "[", "\"\<NETLink`\>\"", "]"}], "\[IndentingNewLine]", 
+ RowBox[{"LoadNETAssembly", "[", 
+  RowBox[{"\"\<Tinkerforge\>\"", ",", 
+   RowBox[{
+    RowBox[{"NotebookDirectory", "[", "]"}], "<>", "\"\<../..\>\""}]}], 
+  "]"}]}], "Input",
+ CellChangeTimes->{
+  3.6001754662962093`*^9, {3.600500602461578*^9, 3.600500602779945*^9}, {
+   3.600500676409213*^9, 3.600500692857397*^9}, {3.600506671115094*^9, 
+   3.600506671529955*^9}, {3.60051017967027*^9, 3.6005101805376387`*^9}, {
+   3.600609927304372*^9, 3.600609958921357*^9}}],
+
+Cell[BoxData[{
+ RowBox[{"host", "=", "\"\<localhost\>\""}], "\[IndentingNewLine]", 
+ RowBox[{"port", "=", "4223"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"uid", "=", "\"\<dmG\>\""}], 
+  RowBox[{"(*", " ", 
+   RowBox[{"Change", " ", "to", " ", "your", " ", "UID"}], " ", "*)"}], 
+  "\[IndentingNewLine]", "\[IndentingNewLine]", 
+  RowBox[{"(*", " ", 
+   RowBox[{
+   "Create", " ", "IPConnection", " ", "and", " ", "device", " ", "object"}], 
+   " ", "*)"}]}], "\n", 
+ RowBox[{"ipcon", "=", 
+  RowBox[{"NETNew", "[", "\"\<Tinkerforge.IPConnection\>\"", "]"}]}], "\n", 
+ RowBox[{"js", "=", 
+  RowBox[{"NETNew", "[", 
+   RowBox[{"\"\<Tinkerforge.BrickletJoystick\>\"", ",", "uid", ",", "ipcon"}],
+    "]"}]}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"ipcon", "@", 
+   RowBox[{"Connect", "[", 
+    RowBox[{"host", ",", "port"}], "]"}]}], "\[IndentingNewLine]", 
+  "\[IndentingNewLine]", 
+  RowBox[{"(*", " ", 
+   RowBox[{
+   "Get", " ", "threshold", " ", "callbacks", " ", "with", " ", "a", " ", 
+    "debounce", " ", "time", " ", "of", " ", "0.2", " ", "seconds", " ", 
+    RowBox[{"(", 
+     RowBox[{"200", "ms"}], ")"}]}], " ", "*)"}]}], "\n", 
+ RowBox[{
+  RowBox[{"js", "@", 
+   RowBox[{"SetDebouncePeriod", "[", "200", "]"}]}], "\[IndentingNewLine]", 
+  "\[IndentingNewLine]", 
+  RowBox[{"(*", " ", 
+   RowBox[{
+   "Callback", " ", "for", " ", "x", " ", "or", " ", "y", " ", "position", 
+    " ", "outside", " ", 
+    RowBox[{"of", "[", 
+     RowBox[{
+      RowBox[{
+       RowBox[{"-", "99"}], ".."}], "99"}], "]"}]}], " ", "*)"}]}], "\n", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"PositionReachedCB", "[", 
+    RowBox[{"sender_", ",", "x_", ",", "y_"}], "]"}], ":=", 
+   "\[IndentingNewLine]", 
+   RowBox[{"Module", "[", 
+    RowBox[{
+     RowBox[{"{", "}"}], ",", "\[IndentingNewLine]", 
+     RowBox[{
+      RowBox[{"If", "[", 
+       RowBox[{
+        RowBox[{"y", "\[Equal]", "100"}], ",", 
+        RowBox[{"Print", "[", "\"\<Top\>\"", "]"}]}], "]"}], ";", 
+      "\[IndentingNewLine]", 
+      RowBox[{"If", "[", 
+       RowBox[{
+        RowBox[{"y", "\[Equal]", 
+         RowBox[{"-", "100"}]}], ",", 
+        RowBox[{"Print", "[", "\"\<Bottom\>\"", "]"}]}], "]"}], ";", 
+      "\[IndentingNewLine]", 
+      RowBox[{"If", "[", 
+       RowBox[{
+        RowBox[{"x", "\[Equal]", "100"}], ",", 
+        RowBox[{"Print", "[", "\"\<Right\>\"", "]"}]}], "]"}], ";", 
+      "\[IndentingNewLine]", 
+      RowBox[{"If", "[", 
+       RowBox[{
+        RowBox[{"x", "\[Equal]", 
+         RowBox[{"-", "100"}]}], ",", 
+        RowBox[{"Print", "[", "\"\<Left\>\"", "]"}]}], "]"}], ";", 
+      "\[IndentingNewLine]", 
+      RowBox[{"Print", "[", "\"\<\>\"", "]"}]}]}], "\[IndentingNewLine]", 
+    "]"}]}], "\[IndentingNewLine]"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"AddEventHandler", "[", 
+   RowBox[{
+    RowBox[{"js", "@", "PositionReached"}], ",", "PositionReachedCB"}], "]"}],
+   "\[IndentingNewLine]", "\[IndentingNewLine]", 
+  RowBox[{"(*", " ", 
+   RowBox[{
+   "Configure", " ", "threshold", " ", "for", " ", 
+    "\"\<x or y value outside of [-99..99]\>\""}], " ", "*)"}]}], "\n", 
+ RowBox[{"option", "=", 
+  "BrickletJoystick`THRESHOLDUOPTIONUOUTSIDE"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"js", "@", 
+   RowBox[{"SetPositionCallbackThreshold", "[", 
+    RowBox[{"option", ",", 
+     RowBox[{"-", "99"}], ",", "99", ",", 
+     RowBox[{"-", "99"}], ",", "99"}], "]"}]}], 
+  "\[IndentingNewLine]"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"Input", "[", "\"\<Click OK to exit\>\"", "]"}], "\n", 
+  "\[IndentingNewLine]", 
+  RowBox[{"(*", " ", 
+   RowBox[{"Clean", " ", "up"}], " ", "*)"}]}], "\[IndentingNewLine]", 
+ RowBox[{"ipcon", "@", 
+  RowBox[{"Disconnect", "[", "]"}]}], "\[IndentingNewLine]", 
+ RowBox[{"ReleaseNETObject", "[", "js", "]"}], "\[IndentingNewLine]", 
+ RowBox[{"ReleaseNETObject", "[", "ipcon", "]"}]}], "Input",
+ CellChangeTimes->{{3.600075175574196*^9, 3.600075177574486*^9}, {
+   3.600075518821967*^9, 3.60007554243471*^9}, {3.600075580562348*^9, 
+   3.600075669308506*^9}, {3.600075705822371*^9, 3.600075921974015*^9}, {
+   3.6000760067507343`*^9, 3.600076009622583*^9}, {3.600077792659996*^9, 
+   3.600077795613958*^9}, {3.600077854705127*^9, 3.600077855342334*^9}, {
+   3.600090981053762*^9, 3.6000909897413397`*^9}, {3.600091048393783*^9, 
+   3.600091071325759*^9}, {3.6000911068928633`*^9, 3.6000911072763557`*^9}, {
+   3.600091413237206*^9, 3.600091428847453*^9}, {3.600091480127982*^9, 
+   3.60009150669311*^9}, {3.6000915673213387`*^9, 3.6000915678002653`*^9}, {
+   3.600092307925643*^9, 3.600092314241997*^9}, {3.600149020784099*^9, 
+   3.6001491107582273`*^9}, {3.600149174456699*^9, 3.6001491869018793`*^9}, {
+   3.600159325847857*^9, 3.6001593470369997`*^9}, {3.600159400246332*^9, 
+   3.6001594542623587`*^9}, {3.60015948914436*^9, 3.600159496930849*^9}, {
+   3.600159548265239*^9, 3.6001595658565407`*^9}, {3.600159646964334*^9, 
+   3.6001596688233643`*^9}, {3.600159762046418*^9, 3.600159781293133*^9}, {
+   3.6001598436646423`*^9, 3.600159856693261*^9}, {3.600161303594071*^9, 
+   3.6001613068538027`*^9}, {3.600161380323941*^9, 3.600161392339135*^9}, {
+   3.600161477386764*^9, 3.6001614810099792`*^9}, {3.600161583541798*^9, 
+   3.600161609048029*^9}, {3.600161653222643*^9, 3.600161653648093*^9}, {
+   3.600161726882321*^9, 3.60016174790372*^9}, {3.6001754564686623`*^9, 
+   3.600175502609065*^9}, {3.600175580233206*^9, 3.600175623073368*^9}, 
+   3.600175678839476*^9, {3.600175722467629*^9, 3.600175827250032*^9}, {
+   3.600175902712735*^9, 3.600175913862976*^9}, {3.600500612855398*^9, 
+   3.600500628060698*^9}, {3.6005006752348833`*^9, 3.600500675854513*^9}, {
+   3.6005062634776382`*^9, 3.600506377395418*^9}, {3.6005066676479816`*^9, 
+   3.6005066680276537`*^9}, {3.6005096380977297`*^9, 
+   3.6005098895599117`*^9}, {3.600509977811022*^9, 3.600509979316684*^9}, {
+   3.6005101814828377`*^9, 3.600510181969675*^9}, 3.600510258167811*^9, {
+   3.600609910932384*^9, 3.60060992155198*^9}, {3.600609968865808*^9, 
+   3.600609969262154*^9}}]
+},
+WindowSize->{1136, 867},
+WindowMargins->{{467, Automatic}, {69, Automatic}},
+FrontEndVersion->"9.0 for Linux x86 (64-bit) (February 7, 2013)",
+StyleDefinitions->"Default.nb"
+]
+(* End of Notebook Content *)
+
+(* Internal cache information *)
+(*CellTagsOutline
+CellTagsIndex->{}
+*)
+(*CellTagsIndex
+CellTagsIndex->{}
+*)
+(*NotebookFileOutline
+Notebook[{
+Cell[400, 13, 556, 11, 55, "Input"],
+Cell[959, 26, 6009, 130, 759, "Input"]
+}
+]
+*)
+
