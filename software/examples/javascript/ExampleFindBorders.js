@@ -2,24 +2,24 @@ var Tinkerforge = require('tinkerforge');
 
 var HOST = 'localhost';
 var PORT = 4223;
-var UID = 'dmG'; //Change to your UID
+var UID = 'dmG'; // Change to your UID
 
-var ipcon = new Tinkerforge.IPConnection(); //Create IP connection
-var js = new Tinkerforge.BrickletJoystick(UID, ipcon); //Create device object
+var ipcon = new Tinkerforge.IPConnection(); // Create IP connection
+var js = new Tinkerforge.BrickletJoystick(UID, ipcon); // Create device object
 
 ipcon.connect(HOST, PORT,
     function(error) {
-        console.log('Error: '+error);        
+        console.log('Error: '+error);
     }
-);// Connect to brickd
-
+); // Connect to brickd
 // Don't use device before ipcon is connected
+
 ipcon.on(Tinkerforge.IPConnection.CALLBACK_CONNECTED,
     function(connectReason) {
         // Get threshold callbacks with a debounce time of 0.2 seconds (200ms)
         js.setDebouncePeriod(200);
         // Configure threshold for "x and y value outside of [-99..99]"
-        js.setPositionCallbackThreshold('o', -99, 99, -99, 99);    
+        js.setPositionCallbackThreshold('o', -99, 99, -99, 99);
     }
 );
 
@@ -49,4 +49,3 @@ process.stdin.on('data',
         process.exit(0);
     }
 );
-
