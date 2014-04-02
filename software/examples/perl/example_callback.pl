@@ -13,11 +13,12 @@ my $js = Tinkerforge::BrickletJoystick->new(&UID, $ipcon); # Create device objec
 # Callback function for pressed and released events 
 sub cb_pressed
 {
-    print "\nPressed\n";
+    print "Pressed\n";
 }
+
 sub cb_released
 {
-    print "\nReleased\n";
+    print "Released\n";
 }
 
 $ipcon->connect(&HOST, &PORT); # Connect to brickd
@@ -27,6 +28,6 @@ $ipcon->connect(&HOST, &PORT); # Connect to brickd
 $js->register_callback($js->CALLBACK_PRESSED, 'cb_pressed');
 $js->register_callback($js->CALLBACK_RELEASED, 'cb_released');
 
-print "\nPress any key to exit...\n";
+print "Press any key to exit...\n";
 <STDIN>;
 $ipcon->disconnect();

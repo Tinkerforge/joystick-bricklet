@@ -13,24 +13,27 @@ my $js = Tinkerforge::BrickletJoystick->new(&UID, $ipcon); # Create device objec
 # Callback for x and y position outside of [-99..99]
 sub cb_reached
 {
-    my($x, $y) = @_;
+    my ($x, $y) = @_;
 
-    if($y == 100)
+    if ($y == 100)
     {
-        print "\nTop\n";
+        print "Top\n";
     }
-    elsif($y == -100)
+    elsif ($y == -100)
     {
-        print "\nBottom\n";
+        print "Bottom\n";
     }
-    if($x == 100)
+
+    if ($x == 100)
     {
-        print "\nRight\n";
+        print "Right\n";
     }
-    elsif($x == -100)
+    elsif ($x == -100)
     {
-        print "\nLeft\n";
+        print "Left\n";
     }
+
+    print "\n";
 }
 
 $ipcon->connect(&HOST, &PORT); # Connect to brickd
@@ -45,6 +48,6 @@ $js->register_callback($js->CALLBACK_POSITION_REACHED, 'cb_reached');
 # Configure threshold for "x and y value outside of [-99..99]"
 $js->set_position_callback_threshold('o', -99, 99, -99, 99);
 
-print "\nPress any key to exit...\n";
+print "Press any key to exit...\n";
 <STDIN>;
 $ipcon->disconnect();
