@@ -1,4 +1,4 @@
-function octave_example_find_borders
+function octave_example_find_borders()
     more off;
     
     HOST = "localhost";

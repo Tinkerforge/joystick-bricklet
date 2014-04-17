@@ -1,4 +1,4 @@
-function matlab_example_simple
+function matlab_example_simple()
     import com.tinkerforge.BrickletJoystick;
     import com.tinkerforge.IPConnection;
 

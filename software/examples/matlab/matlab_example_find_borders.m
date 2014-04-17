@@ -1,4 +1,4 @@
-function matlab_example_find_borders
+function matlab_example_find_borders()
     import com.tinkerforge.BrickletJoystick;
     import com.tinkerforge.IPConnection;
     
