@@ -21,9 +21,9 @@ end
 
 % Callback function for pressed and released events 
 function cb_pressed(e)
-    fprintf('Pressed\n');
+    fprintf("Pressed\n");
 end
 
 function cb_released(e)
-    fprintf('Released\n');
+    fprintf("Released\n");
 end
