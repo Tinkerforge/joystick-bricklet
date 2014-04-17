@@ -13,9 +13,9 @@ function octave_example_simple
 
     % Get current position (returned as x, y coordinate)
     pos = js.getPosition();
-    fprintf("Position(x): %s\n", pos.x.toString);
-    fprintf("Position(y): %s\n", pos.y.toString);
+    fprintf("Position(x): %s\n", pos.x.toString());
+    fprintf("Position(y): %s\n", pos.y.toString());
 
-    input("\nPress any key to exit...\n", "s");
+    input("Press any key to exit...\n", "s");
     ipcon.disconnect();
 end

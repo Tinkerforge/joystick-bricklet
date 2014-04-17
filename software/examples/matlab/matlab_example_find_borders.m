@@ -16,25 +16,25 @@ function matlab_example_find_borders
     js.setDebouncePeriod(200);
 
     % Register threshold reached callback to function cb_reached
-    set(js, 'PositionReachedCallback', @(h, e)cb_reached(e));
+    set(js, 'PositionReachedCallback', @(h, e) cb_reached(e));
 
     % Configure threshold for "x and y value outside of [-99..99]"
     js.setPositionCallbackThreshold('o', -99, 99, -99, 99);
 
-    input('\nPress any key to exit...\n', 's');
+    input('Press any key to exit...\n', 's');
     ipcon.disconnect()
 end
 
 % Callback for x and y position outside of [-99..99]
-function cb_reached(pos)
-    if pos.y == 100
+function cb_reached(e)
+    if e.y == 100
         fprintf('Top\n');
-    elseif pos.y == -100
+    elseif e.y == -100
         fprintf('Bottom\n');
     end
-    if pos.x == 100
+    if e.x == 100
         fprintf('Right\n');
-    elseif pos.x == -100
+    elseif e.x == -100
         fprintf('Left\n');
     end
     fprintf('\n');

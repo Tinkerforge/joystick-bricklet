@@ -12,18 +12,18 @@ function octave_example_callback
     % Don't use device before ipcon is connected
 
     % Register callbacks for pressed and released events
-    js.addPressedListener("cb_pressed");
-    js.addReleasedListener("cb_released");
+    js.addPressedCallback(@cb_pressed);
+    js.addReleasedCallback(@cb_released);
 
-    input("\nPress any key to exit...\n", "s");
+    input("Press any key to exit...\n", "s");
     ipcon.disconnect();
 end
 
 % Callback function for pressed and released events 
-function cb_pressed()
+function cb_pressed(e)
     fprintf('Pressed\n');
 end
 
-function cb_released()
+function cb_released(e)
     fprintf('Released\n');
 end

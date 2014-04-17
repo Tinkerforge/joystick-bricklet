@@ -15,25 +15,25 @@ function octave_example_find_borders
     js.setDebouncePeriod(200);
 
     % Register threshold reached callback to function cb_reached
-    js.addPositionReachedListener("cb_reached");
+    js.addPositionReachedCallback(@cb_reached);
 
     % Configure threshold for "x and y value outside of [-99..99]"
     js.setPositionCallbackThreshold(js.THRESHOLD_OPTION_OUTSIDE, -99, 99, -99, 99);
 
-    input("\nPress any key to exit...\n", "s");
+    input("Press any key to exit...\n", "s");
     ipcon.disconnect()
 end
 
 % Callback for x and y position outside of [-99..99]
-function cb_reached(x, y)
-    x = str2double(x.toString());
-    y = str2double(y.toString());
+function cb_reached(e)
+    x = str2double(e.x.toString());
+    y = str2double(e.y.toString());
+
     if y == 100
         fprintf("Top\n");
     elseif y == -100
         fprintf("Bottom\n");
     end
-    
     if x == 100
         fprintf("Right\n");
     elseif x ==-100

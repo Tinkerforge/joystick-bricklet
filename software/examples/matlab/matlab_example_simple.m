@@ -17,6 +17,6 @@ function matlab_example_simple
     fprintf('Position(x): %g\n', pos.x);
     fprintf('Position(y): %g\n', pos.y);
 
-    input('\nPress any key to exit...\n', 's');
+    input('Press any key to exit...\n', 's');
     ipcon.disconnect();
 end

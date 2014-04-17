@@ -13,18 +13,18 @@ function matlab_example_callback
     % Don't use device before ipcon is connected
 
     % Register callbacks for pressed and released events
-    set(js, 'PressedCallback', @(h, e)cb_pressed());
-    set(js, 'ReleasedCallback', @(h, e)cb_released());
+    set(js, 'PressedCallback', @(h, e) cb_pressed(e));
+    set(js, 'ReleasedCallback', @(h, e) cb_released(e));
 
-    input('\nPress any key to exit...\n', 's');
+    input('Press any key to exit...\n', 's');
     ipcon.disconnect();
 end
 
 % Callback function for pressed and released events 
-function cb_pressed()
+function cb_pressed(e)
     fprintf('Pressed\n');
 end
 
-function cb_released()
+function cb_released(e)
     fprintf('Released\n');
 end
