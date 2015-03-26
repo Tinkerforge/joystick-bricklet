@@ -1,4 +1,4 @@
-update=Sa 10 Nov 2012 00:28:37 CET
+update=Tue 03 Jul 2012 10:09:24 AM CEST
 version=1
 last_client=pcbnew
 [cvpcb]
@@ -15,7 +15,7 @@ EquName1=devcms
 version=1
 [eeschema]
 version=1
-LibDir=kicad-libraries
+LibDir=../kicad-libraries
 NetFmt=1
 HPGLSpd=20
 HPGLDm=15
@@ -82,7 +82,6 @@ PadDrlX=394
 PadDimH=787
 PadDimV=787
 BoardThickness=630
-SgPcb45=1
 TxtPcbV=800
 TxtPcbH=600
 TxtModV=600
@@ -95,7 +94,7 @@ TxtLar=120
 MSegLar=150
 LastNetListRead=joystick.net
 [pcbnew/libraries]
-LibDir=kicad-libraries
+LibDir=../kicad-libraries
 LibName1=sockets
 LibName2=connect
 LibName3=discret
