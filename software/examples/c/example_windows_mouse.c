@@ -1,4 +1,3 @@
-
 // This example is Windows only. Link to user32.lib in addition to ws2_32.lib
 
 #include <stdio.h>
