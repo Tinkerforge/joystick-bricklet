@@ -51,16 +51,16 @@
                 js.on(Tinkerforge.BrickletJoystick.CALLBACK_POSITION_REACHED,
                     function(x, y) {
                         if(y === 100) {
-                            textArea.value += 'Top';
+                            textArea.value += 'Top ';
                         }
                         if(y === -100) {
-                            textArea.value += 'Bottom';
+                            textArea.value += 'Bottom ';
                         }
                         if(x === 100) {
-                            textArea.value += 'Right';
+                            textArea.value += 'Right ';
                         }
                         if(x === -100) {
-                            textArea.value += 'Left';
+                            textArea.value += 'Left ';
                         }
                         textArea.value += '\n';
                         textArea.scrollTop = textArea.scrollHeight;

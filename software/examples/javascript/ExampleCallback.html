@@ -42,15 +42,13 @@
                 // Register callbacks for pressed and released events
                 js.on(Tinkerforge.BrickletJoystick.CALLBACK_PRESSED,
                     function() {
-                        textArea.value += 'Pressed';
-                        textArea.value += '\n';
+                        textArea.value += 'Pressed\n';
                         textArea.scrollTop = textArea.scrollHeight;
                     }
                 );
                 js.on(Tinkerforge.BrickletJoystick.CALLBACK_RELEASED,
                     function() {
-                        textArea.value += 'Released';
-                        textArea.value += '\n';
+                        textArea.value += 'Released\n';
                         textArea.scrollTop = textArea.scrollHeight;
                     }
                 );
