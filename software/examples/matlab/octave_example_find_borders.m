@@ -1,9 +1,9 @@
 function octave_example_find_borders()
     more off;
-    
+
     HOST = "localhost";
     PORT = 4223;
-    UID = "dmC"; % Change to your UID
+    UID = "aQ2"; % Change to your UID
 
     ipcon = java_new("com.tinkerforge.IPConnection"); % Create IP connection
     js = java_new("com.tinkerforge.BrickletJoystick", UID, ipcon); % Create device object
@@ -26,8 +26,8 @@ end
 
 % Callback for x and y position outside of [-99..99]
 function cb_reached(e)
-    x = str2double(e.x.toString());
-    y = str2double(e.y.toString());
+    x = short2int(e.x);
+    y = short2int(e.y);
 
     if y == 100
         fprintf("Top\n");
@@ -40,4 +40,12 @@ function cb_reached(e)
         fprintf("Left\n");
     end
     fprintf("\n");
+end
+
+function int = short2int(short)
+    if compare_versions(version(), "3.8", "<=")
+        int = short.intValue();
+    else
+        int = short;
+    end
 end

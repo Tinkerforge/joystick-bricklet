@@ -1,9 +1,9 @@
 function octave_example_callback()
     more off;
-    
+
     HOST = "localhost";
     PORT = 4223;
-    UID = "dmC"; % Change to your UID
+    UID = "aQ2"; % Change to your UID
 
     ipcon = java_new("com.tinkerforge.IPConnection"); % Create IP connection
     js = java_new("com.tinkerforge.BrickletJoystick", UID, ipcon); % Create device object
@@ -19,7 +19,7 @@ function octave_example_callback()
     ipcon.disconnect();
 end
 
-% Callback function for pressed and released events 
+% Callback function for pressed and released events
 function cb_pressed(e)
     fprintf("Pressed\n");
 end
