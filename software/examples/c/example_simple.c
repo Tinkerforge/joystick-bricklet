@@ -5,7 +5,7 @@
 
 #define HOST "localhost"
 #define PORT 4223
-#define UID "abcd" // Change to your UID
+#define UID "XYZ" // Change to your UID
 
 int main() {
 	// Create IP connection
@@ -13,8 +13,8 @@ int main() {
 	ipcon_create(&ipcon);
 
 	// Create device object
-	Joystick js;
-	joystick_create(&js, UID, &ipcon); 
+	Joystick j;
+	joystick_create(&j, UID, &ipcon);
 
 	// Connect to brickd
 	if(ipcon_connect(&ipcon, HOST, PORT) < 0) {
@@ -26,7 +26,7 @@ int main() {
 	// Get current position (x and y value)
 	int16_t pos_x;
 	int16_t pos_y;
-	if(joystick_get_position(&js, &pos_x, &pos_y) < 0) {
+	if(joystick_get_position(&j, &pos_x, &pos_y) < 0) {
 		fprintf(stderr, "Could not get value, probably timeout\n");
 		exit(1);
 	}

@@ -4,7 +4,7 @@ class Example
 {
 	private static string HOST = "localhost";
 	private static int PORT = 4223;
-	private static string UID = "ABC"; // Change to your UID
+	private static string UID = "XYZ"; // Change to your UID
 
 	// Callback for x or y position outside of [-99..99]
 	static void ReachedCB(BrickletJoystick sender, short x, short y)
@@ -33,19 +33,19 @@ class Example
 	static void Main()
 	{
 		IPConnection ipcon = new IPConnection(); // Create IP connection
-		BrickletJoystick joy = new BrickletJoystick(UID, ipcon); // Create device object
+		BrickletJoystick j = new BrickletJoystick(UID, ipcon); // Create device object
 
 		ipcon.Connect(HOST, PORT); // Connect to brickd
 		// Don't use device before ipcon is connected
 
 		// Get threshold callbacks with a debounce time of 0.2 seconds (200ms)
-		joy.SetDebouncePeriod(200);
+		j.SetDebouncePeriod(200);
 
 		// Register threshold reached callback to function ReachedCB
-		joy.PositionReached += ReachedCB;
+		j.PositionReached += ReachedCB;
 
 		// Configure threshold for "x or y value outside of [-99..99]"
-		joy.SetPositionCallbackThreshold('o', -99, 99, -99, 99);
+		j.SetPositionCallbackThreshold('o', -99, 99, -99, 99);
 
 		System.Console.WriteLine("Press enter to exit");
 		System.Console.ReadLine();

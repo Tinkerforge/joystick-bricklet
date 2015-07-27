@@ -5,7 +5,7 @@
 
 #define HOST "localhost"
 #define PORT 4223
-#define UID "abcd" // Change to your UID
+#define UID "XYZ" // Change to your UID
 
 // Callback for x or y position outside of [-99..99]
 void cb_reached(int16_t x, int16_t y, void *user_data) {
@@ -32,8 +32,8 @@ int main() {
 	ipcon_create(&ipcon);
 
 	// Create device object
-	Joystick js;
-	joystick_create(&js, UID, &ipcon);
+	Joystick j;
+	joystick_create(&j, UID, &ipcon);
 
 	// Connect to brickd
 	if(ipcon_connect(&ipcon, HOST, PORT) < 0) {
@@ -43,16 +43,16 @@ int main() {
 	// Don't use device before ipcon is connected
 
 	// Get threshold callbacks with a debounce time of 0.2 seconds (200ms)
-	joystick_set_debounce_period(&js, 200);
+	joystick_set_debounce_period(&j, 200);
 
 	// Register threshold reached callback to function cb_reached
-	joystick_register_callback(&js,
+	joystick_register_callback(&j,
 	                           JOYSTICK_CALLBACK_POSITION_REACHED,
 	                           (void *)cb_reached,
 	                           NULL);
 
 	// Configure threshold for "x or y value outside of [-99..99]"
-	joystick_set_position_callback_threshold(&js, 'o', -99, 99, -99, 99);
+	joystick_set_position_callback_threshold(&j, 'o', -99, 99, -99, 99);
 
 	printf("Press key to exit\n");
 	getchar();

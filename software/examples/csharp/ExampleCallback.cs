@@ -4,7 +4,7 @@ class Example
 {
 	private static string HOST = "localhost";
 	private static int PORT = 4223;
-	private static string UID = "ABC"; // Change to your UID
+	private static string UID = "XYZ"; // Change to your UID
 
 	// Callback functions for pressed and released events
 	static void PressedCB(BrickletJoystick sender)
@@ -17,17 +17,17 @@ class Example
 		System.Console.WriteLine("Released");
 	}
 
-	static void Main() 
+	static void Main()
 	{
 		IPConnection ipcon = new IPConnection(); // Create IP connection
-		BrickletJoystick joy = new BrickletJoystick(UID, ipcon); // Create device object
+		BrickletJoystick j = new BrickletJoystick(UID, ipcon); // Create device object
 
 		ipcon.Connect(HOST, PORT); // Connect to brickd
 		// Don't use device before ipcon is connected
 
 		// Register callbacks for pressed and released events
-		joy.Pressed += PressedCB;
-		joy.Released += ReleasedCB;
+		j.Pressed += PressedCB;
+		j.Released += ReleasedCB;
 
 		System.Console.WriteLine("Press enter to exit");
 		System.Console.ReadLine();
