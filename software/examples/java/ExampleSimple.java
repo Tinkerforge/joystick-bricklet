@@ -1,5 +1,6 @@
 import com.tinkerforge.IPConnection;
 import com.tinkerforge.BrickletJoystick;
+import com.tinkerforge.BrickletJoystick.Position;
 
 public class ExampleSimple {
 	private static final String HOST = "localhost";
