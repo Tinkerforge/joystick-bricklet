@@ -1,10 +1,31 @@
-1.0.0: Initial version
-1.1.0: Add support for tick types
-1.1.1: Add sleep time between joystick direction change (otherwise analog switch sometimes gets hot)
-1.1.2: Use 16bit for joystick calibration (8 bit to small for some joysticks)
-1.1.3: Use correct bool logic for "outside callback"
-1.1.4: Fix threshold period error (missing parentheses)
-2.0.0: Support for protocol 2.0
-2.0.1: Fix timeout in threshold callback functions (through brickletlib)
-2.0.2: Increase analog value integration time (through brickletlib) and decrease averaging to allow more stable joystick values if Joystick is used over WiFi.
-2.0.3: Fix wrong length for GetDebounce packet (through brickletlib)
+1.0.0:
+- Initial version
+
+1.1.0:
+- Add support for tick types
+
+1.1.1:
+- Add sleep time between joystick direction change (otherwise analog switch
+  sometimes gets hot)
+
+1.1.2:
+- Use 16bit for joystick calibration (8 bit to small for some joysticks)
+
+1.1.3:
+- Use correct bool logic for "outside callback"
+
+1.1.4:
+- Fix threshold period error (missing parentheses)
+
+2.0.0:
+- Support for Protocol 2.0
+
+2.0.1:
+- Fix timeout in threshold callback functions (through brickletlib)
+
+2.0.2:
+- Increase analog value integration time (through brickletlib) and decrease
+  averaging to allow more stable joystick values if used over Wi-Fi
+
+2.0.3:
+- Fix wrong length for GetDebounce packet (through brickletlib)
