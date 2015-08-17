@@ -10,7 +10,7 @@ type
   TExample = class
   private
     ipcon: TIPConnection;
-    js: TBrickletJoystick;
+    j: TBrickletJoystick;
   public
     procedure Execute;
   end;
@@ -18,7 +18,7 @@ type
 const
   HOST = 'localhost';
   PORT = 4223;
-  UID = '9Bw'; { Change to your UID }
+  UID = 'XYZ'; { Change to your UID }
 
 var
   e: TExample;
@@ -30,14 +30,14 @@ begin
   ipcon := TIPConnection.Create;
 
   { Create device object }
-  js := TBrickletJoystick.Create(UID, ipcon);
+  j := TBrickletJoystick.Create(UID, ipcon);
 
   { Connect to brickd }
   ipcon.Connect(HOST, PORT);
   { Don't use device before ipcon is connected }
 
   { Get current position (x and y value) }
-  js.GetPosition(posX, posY);
+  j.GetPosition(posX, posY);
   WriteLn(Format('Position: %d, %d', [posX, posY]));
 
   WriteLn('Press key to exit');

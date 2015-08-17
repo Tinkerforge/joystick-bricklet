@@ -10,7 +10,7 @@ type
   TExample = class
   private
     ipcon: TIPConnection;
-    js: TBrickletJoystick;
+    j: TBrickletJoystick;
   public
     procedure PressedCB(sender: TBrickletJoystick);
     procedure ReleasedCB(sender: TBrickletJoystick);
@@ -20,7 +20,7 @@ type
 const
   HOST = 'localhost';
   PORT = 4223;
-  UID = '9Bw'; { Change to your UID }
+  UID = 'XYZ'; { Change to your UID }
 
 var
   e: TExample;
@@ -42,15 +42,15 @@ begin
   ipcon := TIPConnection.Create;
 
   { Create device object }
-  js := TBrickletJoystick.Create(UID, ipcon);
+  j := TBrickletJoystick.Create(UID, ipcon);
 
   { Connect to brickd }
   ipcon.Connect(HOST, PORT);
   { Don't use device before ipcon is connected }
 
   { Register callbacks for pressed and released events }
-  js.OnPressed := {$ifdef FPC}@{$endif}PressedCB;
-  js.OnReleased := {$ifdef FPC}@{$endif}ReleasedCB;
+  j.OnPressed := {$ifdef FPC}@{$endif}PressedCB;
+  j.OnReleased := {$ifdef FPC}@{$endif}ReleasedCB;
 
   WriteLn('Press key to exit');
   ReadLn;
