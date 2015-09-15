@@ -11,7 +11,7 @@
 
 #define HOST "localhost"
 #define PORT 4223
-#define UID "dmC" // Change to your UID
+#define UID "XYZ" // Change to your UID
 
 // Fake a mouse button event
 void send_mouse_button(uint32_t event) {
@@ -52,30 +52,30 @@ void cb_released(void *user_data) {
 }
 
 // Joystick moves mouse and the button is mapped to left mouse button
-int main() {
-	IPConnection ipcon;
-	Joystick js;
-
+int main(void) {
 	// Create IP connection
+	IPConnection ipcon;
 	ipcon_create(&ipcon);
 
 	// Create device object
-	joystick_create(&js, UID, &ipcon);
+	Joystick j;
+	joystick_create(&j, UID, &ipcon);
 
 	// Connect to brickd
 	if(ipcon_connect(&ipcon, HOST, PORT) < 0) {
 		fprintf(stderr, "Could not connect\n");
-		exit(1);
+		return 1;
 	}
 	// Don't use device before ipcon is connected
 
-	// Register callbacks for pressed and released events
-	joystick_register_callback(&js,
+	// Register pressed callback to function cb_pressed
+	joystick_register_callback(&j,
 	                           JOYSTICK_CALLBACK_PRESSED,
 	                           (void *)cb_pressed,
 	                           NULL);
 
-	joystick_register_callback(&js,
+	// Register released callback to function cb_released
+	joystick_register_callback(&j,
 	                           JOYSTICK_CALLBACK_RELEASED,
 	                           (void *)cb_released,
 	                           NULL);
@@ -83,8 +83,12 @@ int main() {
 	printf("Press ctrl+c to exit\n");
 
 	while(true) {
+		// Get current position
 		int16_t x, y;
-		joystick_get_position(&js, &x, &y);
+		if(joystick_get_position(&j, &x, &y) < 0) {
+			fprintf(stderr, "Could not get position, probably timeout\n");
+			return 1;
+		}
 
 		x = x / 4; // Slow down by factor of 4
 		y = -y / 4; // Slow down by factor of 4 and invert axis
@@ -95,15 +99,13 @@ int main() {
 	}
 
 	ipcon_destroy(&ipcon); // Calls ipcon_disconnect internally
-
 	return 0;
 }
 
 #else
 
-int main() {
+int main(void) {
 	printf("This example is Windows only!\n");
-
 	return 0;
 }
 
