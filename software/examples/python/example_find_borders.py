@@ -8,8 +8,8 @@ UID = "XYZ" # Change to your UID
 from tinkerforge.ip_connection import IPConnection
 from tinkerforge.bricklet_joystick import BrickletJoystick
 
-# Callback for x and y position outside of [-99..99]
-def cb_reached(x, y):
+# Callback function for position reached callback
+def cb_position_reached(x, y):
     if y == 100:
         print('Top')
     elif y == -100:
@@ -20,7 +20,7 @@ def cb_reached(x, y):
     elif x == -100:
         print('Left')
 
-    print('')
+    print("")
 
 if __name__ == "__main__":
     ipcon = IPConnection() # Create IP connection
@@ -32,11 +32,11 @@ if __name__ == "__main__":
     # Get threshold callbacks with a debounce time of 0.2 seconds (200ms)
     j.set_debounce_period(200)
 
-    # Register threshold reached callback to function cb_reached
-    j.register_callback(j.CALLBACK_POSITION_REACHED, cb_reached)
+    # Register position reached callback to function cb_position_reached
+    j.register_callback(j.CALLBACK_POSITION_REACHED, cb_position_reached)
 
-    # Configure threshold for "x and y value outside of [-99..99]"
-    j.set_position_callback_threshold('o', -99, 99, -99, 99)
+    # Configure threshold for position "outside of -99, -99 to 99, 99"
+    j.set_position_callback_threshold("o", -99, 99, -99, 99)
 
-    raw_input('Press key to exit\n') # Use input() in Python 3
+    raw_input("Press key to exit\n") # Use input() in Python 3
     ipcon.disconnect()

@@ -15,10 +15,11 @@ if __name__ == "__main__":
     ipcon.connect(HOST, PORT) # Connect to brickd
     # Don't use device before ipcon is connected
 
-    # Get current position (returned as tuple x,y)
-    position = j.get_position()
+    # Get current position
+    x, y = j.get_position()
 
-    print('Position: ' + str(position))
+    print("Position[X]: " + str(x))
+    print("Position[Y]: " + str(y))
 
-    raw_input('Press key to exit\n') # Use input() in Python 3
+    raw_input("Press key to exit\n") # Use input() in Python 3
     ipcon.disconnect()

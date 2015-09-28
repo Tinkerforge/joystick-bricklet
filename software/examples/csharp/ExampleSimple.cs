@@ -1,3 +1,4 @@
+using System;
 using Tinkerforge;
 
 class Example
@@ -15,14 +16,14 @@ class Example
 		// Don't use device before ipcon is connected
 
 		// Get current position
-		short posX;
-		short posY;
-		j.GetPosition(out posX, out posY);
+		short x, y;
+		j.GetPosition(out x, out y);
 
-		System.Console.WriteLine("Position: (" + posX + ", " + posY + ")");
+		Console.WriteLine("Position[X]: " + x);
+		Console.WriteLine("Position[Y]: " + y);
 
-		System.Console.WriteLine("Press enter to exit");
-		System.Console.ReadLine();
+		Console.WriteLine("Press enter to exit");
+		Console.ReadLine();
 		ipcon.Disconnect();
 	}
 }

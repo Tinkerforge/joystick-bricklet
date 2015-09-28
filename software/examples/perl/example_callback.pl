@@ -7,27 +7,30 @@ use constant HOST => 'localhost';
 use constant PORT => 4223;
 use constant UID => 'XYZ'; # Change to your UID
 
-my $ipcon = Tinkerforge::IPConnection->new(); # Create IP connection
-my $j = Tinkerforge::BrickletJoystick->new(&UID, $ipcon); # Create device object
-
-# Callback function for pressed and released events 
+# Callback subroutine for pressed callback
 sub cb_pressed
 {
     print "Pressed\n";
 }
 
+# Callback subroutine for released callback
 sub cb_released
 {
     print "Released\n";
 }
 
+my $ipcon = Tinkerforge::IPConnection->new(); # Create IP connection
+my $j = Tinkerforge::BrickletJoystick->new(&UID, $ipcon); # Create device object
+
 $ipcon->connect(&HOST, &PORT); # Connect to brickd
 # Don't use device before ipcon is connected
 
-# Register callbacks for pressed and released events
+# Register pressed callback to subroutine cb_pressed
 $j->register_callback($j->CALLBACK_PRESSED, 'cb_pressed');
+
+# Register released callback to subroutine cb_released
 $j->register_callback($j->CALLBACK_RELEASED, 'cb_released');
 
-print "Press any key to exit...\n";
+print "Press key to exit\n";
 <STDIN>;
 $ipcon->disconnect();

@@ -19,7 +19,7 @@ ipcon.connect HOST, PORT # Connect to brickd
 # Get threshold callbacks with a debounce time of 0.2 seconds (200ms)
 j.set_debounce_period 200
 
-# Register position callback for x or y position outside of [-99..99]
+# Register position reached callback
 j.register_callback(BrickletJoystick::CALLBACK_POSITION_REACHED) do |x, y|
   if y == 100
     puts 'Top'
@@ -36,7 +36,7 @@ j.register_callback(BrickletJoystick::CALLBACK_POSITION_REACHED) do |x, y|
   puts ''
 end
 
-# Configure threshold for "x or y value outside of [-99..99]"
+# Configure threshold for position "outside of -99, -99 to 99, 99"
 j.set_position_callback_threshold 'o', -99, 99, -99, 99
 
 puts 'Press key to exit'

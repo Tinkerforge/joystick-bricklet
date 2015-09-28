@@ -8,12 +8,13 @@ UID = "XYZ" # Change to your UID
 from tinkerforge.ip_connection import IPConnection
 from tinkerforge.bricklet_joystick import BrickletJoystick
 
-# Callback function for pressed and released events 
+# Callback function for pressed callback
 def cb_pressed():
-    print('Pressed')
+    print("Pressed")
 
+# Callback function for released callback
 def cb_released():
-    print('Released')
+    print("Released")
 
 if __name__ == "__main__":
     ipcon = IPConnection() # Create IP connection
@@ -22,9 +23,11 @@ if __name__ == "__main__":
     ipcon.connect(HOST, PORT) # Connect to brickd
     # Don't use device before ipcon is connected
 
-    # Register callbacks for pressed and released events
+    # Register pressed callback to function cb_pressed
     j.register_callback(j.CALLBACK_PRESSED, cb_pressed)
+
+    # Register released callback to function cb_released
     j.register_callback(j.CALLBACK_RELEASED, cb_released)
 
-    raw_input('Press key to exit\n') # Use input() in Python 3
+    raw_input("Press key to exit\n") # Use input() in Python 3
     ipcon.disconnect()

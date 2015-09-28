@@ -1,3 +1,4 @@
+Imports System
 Imports Tinkerforge
 
 Module ExampleSimple
@@ -15,12 +16,14 @@ Module ExampleSimple
         ' Get current position
         Dim x As Short
         Dim y As Short
+
         j.GetPosition(x, y)
 
-        System.Console.WriteLine("Position: (" + x.ToString() + ", " + y.ToString() + ")")
+        Console.WriteLine("Position[X]: " + x.ToString())
+        Console.WriteLine("Position[Y]: " + y.ToString())
 
-        System.Console.WriteLine("Press key to exit")
-        System.Console.ReadLine()
+        Console.WriteLine("Press key to exit")
+        Console.ReadLine()
         ipcon.Disconnect()
     End Sub
 End Module

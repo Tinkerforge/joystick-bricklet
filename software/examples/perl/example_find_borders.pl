@@ -7,11 +7,8 @@ use constant HOST => 'localhost';
 use constant PORT => 4223;
 use constant UID => 'XYZ'; # Change to your UID
 
-my $ipcon = Tinkerforge::IPConnection->new(); # Create IP connection
-my $j = Tinkerforge::BrickletJoystick->new(&UID, $ipcon); # Create device object
-
-# Callback for x and y position outside of [-99..99]
-sub cb_reached
+# Callback subroutine for position reached callback
+sub cb_position_reached
 {
     my ($x, $y) = @_;
 
@@ -36,18 +33,21 @@ sub cb_reached
     print "\n";
 }
 
+my $ipcon = Tinkerforge::IPConnection->new(); # Create IP connection
+my $j = Tinkerforge::BrickletJoystick->new(&UID, $ipcon); # Create device object
+
 $ipcon->connect(&HOST, &PORT); # Connect to brickd
 # Don't use device before ipcon is connected
 
 # Get threshold callbacks with a debounce time of 0.2 seconds (200ms)
 $j->set_debounce_period(200);
 
-# Register threshold reached callback to function cb_reached
-$j->register_callback($j->CALLBACK_POSITION_REACHED, 'cb_reached');
+# Register position reached callback to subroutine cb_position_reached
+$j->register_callback($j->CALLBACK_POSITION_REACHED, 'cb_position_reached');
 
-# Configure threshold for "x and y value outside of [-99..99]"
+# Configure threshold for position "outside of -99, -99 to 99, 99"
 $j->set_position_callback_threshold('o', -99, 99, -99, 99);
 
-print "Press any key to exit...\n";
+print "Press key to exit\n";
 <STDIN>;
 $ipcon->disconnect();

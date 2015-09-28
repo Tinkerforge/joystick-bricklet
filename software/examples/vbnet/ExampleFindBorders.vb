@@ -1,3 +1,4 @@
+Imports System
 Imports Tinkerforge
 
 Module ExampleFindBorders
@@ -5,21 +6,21 @@ Module ExampleFindBorders
     Const PORT As Integer = 4223
     Const UID As String = "XYZ" ' Change to your UID
 
-    ' Callback for x or y position outside of [-99..99]
-    Sub ReachedCB(ByVal sender As BrickletJoystick, ByVal x As Short, ByVal y As Short)
+    ' Callback subroutine for position reached callback
+    Sub PositionReachedCB(ByVal sender As BrickletJoystick, ByVal x As Short, ByVal y As Short)
         If y = 100 Then
-            System.Console.WriteLine("Top")
+            Console.WriteLine("Top")
         Else If y = -100 Then
-            System.Console.WriteLine("Bottom")
+            Console.WriteLine("Bottom")
         End If
 
         If x = 100 Then
-            System.Console.WriteLine("Right")
+            Console.WriteLine("Right")
         Else If x = -100 Then
-            System.Console.WriteLine("Left")
+            Console.WriteLine("Left")
         End If
 
-        System.Console.WriteLine("")
+        Console.WriteLine("")
     End Sub
 
     Sub Main()
@@ -32,14 +33,14 @@ Module ExampleFindBorders
         ' Get threshold callbacks with a debounce time of 0.2 seconds (200ms)
         j.SetDebouncePeriod(200)
 
-        ' Register threshold reached callback to function ReachedCB
-        AddHandler j.PositionReached, AddressOf ReachedCB
+        ' Register position reached callback to subroutine PositionReachedCB
+        AddHandler j.PositionReached, AddressOf PositionReachedCB
 
-        ' Configure threshold for "x or y value outside of [-99..99]"
+        ' Configure threshold for position "outside of -99, -99 to 99, 99"
         j.SetPositionCallbackThreshold("o"C, -99, 99, -99, 99)
 
-        System.Console.WriteLine("Press key to exit")
-        System.Console.ReadLine()
+        Console.WriteLine("Press key to exit")
+        Console.ReadLine()
         ipcon.Disconnect()
     End Sub
 End Module

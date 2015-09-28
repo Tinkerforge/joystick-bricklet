@@ -7,13 +7,14 @@
 #define PORT 4223
 #define UID "XYZ" // Change to your UID
 
-// Callback function for pressed and released events
+// Callback function for pressed callback
 void cb_pressed(void *user_data) {
 	(void)user_data; // avoid unused parameter warning
 
 	printf("Pressed\n");
 }
 
+// Callback function for released callback
 void cb_released(void *user_data) {
 	(void)user_data; // avoid unused parameter warning
 
@@ -36,12 +37,13 @@ int main(void) {
 	}
 	// Don't use device before ipcon is connected
 
-	// Register callbacks for pressed and released events
+	// Register pressed callback to function cb_pressed
 	joystick_register_callback(&j,
 	                           JOYSTICK_CALLBACK_PRESSED,
 	                           (void *)cb_pressed,
 	                           NULL);
 
+	// Register released callback to function cb_released
 	joystick_register_callback(&j,
 	                           JOYSTICK_CALLBACK_RELEASED,
 	                           (void *)cb_released,

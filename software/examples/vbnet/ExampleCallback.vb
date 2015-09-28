@@ -1,3 +1,4 @@
+Imports System
 Imports Tinkerforge
 
 Module ExampleCallback
@@ -5,13 +6,14 @@ Module ExampleCallback
     Const PORT As Integer = 4223
     Const UID As String = "XYZ" ' Change to your UID
 
-    ' Callback functions for pressed and released events
+    ' Callback subroutine for pressed callback
     Sub PressedCB(ByVal sender As BrickletJoystick)
-        System.Console.WriteLine("Pressed")
+        Console.WriteLine("Pressed")
     End Sub
 
+    ' Callback subroutine for released callback
     Sub ReleasedCB(ByVal sender As BrickletJoystick)
-        System.Console.WriteLine("Released")
+        Console.WriteLine("Released")
     End Sub
 
     Sub Main()
@@ -21,12 +23,14 @@ Module ExampleCallback
         ipcon.Connect(HOST, PORT) ' Connect to brickd
         ' Don't use device before ipcon is connected
 
-        ' Register callbacks for pressed and released events
+        ' Register pressed callback to subroutine PressedCB
         AddHandler j.Pressed, AddressOf PressedCB
+
+        ' Register released callback to subroutine ReleasedCB
         AddHandler j.Released, AddressOf ReleasedCB
 
-        System.Console.WriteLine("Press key to exit")
-        System.Console.ReadLine()
+        Console.WriteLine("Press key to exit")
+        Console.ReadLine()
         ipcon.Disconnect()
     End Sub
 End Module

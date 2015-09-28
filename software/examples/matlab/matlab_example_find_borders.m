@@ -1,32 +1,32 @@
 function matlab_example_find_borders()
-    import com.tinkerforge.BrickletJoystick;
     import com.tinkerforge.IPConnection;
-    
-    HOST ='localhost';
+    import com.tinkerforge.BrickletJoystick;
+
+    HOST = 'localhost';
     PORT = 4223;
-    UID = 'dmC'; % Change to your UID
+    UID = 'XYZ'; % Change to your UID
 
     ipcon = IPConnection(); % Create IP connection
-    js = BrickletJoystick(UID, ipcon); % Create device object
+    j = BrickletJoystick(UID, ipcon); % Create device object
 
-    ipcon.connect(HOST, PORT) % Connect to brickd
+    ipcon.connect(HOST, PORT); % Connect to brickd
     % Don't use device before ipcon is connected
 
     % Get threshold callbacks with a debounce time of 0.2 seconds (200ms)
-    js.setDebouncePeriod(200);
+    j.setDebouncePeriod(200);
 
-    % Register threshold reached callback to function cb_reached
-    set(js, 'PositionReachedCallback', @(h, e) cb_reached(e));
+    % Register position reached callback to function cb_position_reached
+    set(j, 'PositionReachedCallback', @(h, e) cb_position_reached(e));
 
-    % Configure threshold for "x and y value outside of [-99..99]"
-    js.setPositionCallbackThreshold('o', -99, 99, -99, 99);
+    % Configure threshold for position "outside of -99, -99 to 99, 99"
+    j.setPositionCallbackThreshold('o', -99, 99, -99, 99);
 
-    input('Press any key to exit...\n', 's');
-    ipcon.disconnect()
+    input('Press key to exit\n', 's');
+    ipcon.disconnect();
 end
 
-% Callback for x and y position outside of [-99..99]
-function cb_reached(e)
+% Callback function for position reached callback
+function cb_position_reached(e)
     if e.y == 100
         fprintf('Top\n');
     elseif e.y == -100

@@ -1,13 +1,16 @@
 #!/bin/sh
-# connects to localhost:4223 by default, use --host and --port to change it
+# Connects to localhost:4223 by default, use --host and --port to change this
 
-# change to your UID
-uid=XYZ
+uid=XYZ # Change to your UID
 
-# handle incoming pressed and released callbacks
-# note: this chaining of two dispatches assumes that a pressed callback is
-#       always followed by a released callback
+# Handle incoming pressed callbacks
 tinkerforge dispatch joystick-bricklet $uid pressed\
- --execute "echo Pressed;
-            tinkerforge dispatch --duration exit-after-first joystick-bricklet $uid released\
-             --execute 'echo Released'"
+ --execute "echo Pressed" &
+
+# Handle incoming released callbacks
+tinkerforge dispatch joystick-bricklet $uid released\
+ --execute "echo Released" &
+
+echo "Press key to exit"; read dummy
+
+kill -- -$$ # Stop callback dispatch in background

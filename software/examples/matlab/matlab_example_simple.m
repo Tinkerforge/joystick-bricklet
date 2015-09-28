@@ -1,22 +1,23 @@
 function matlab_example_simple()
-    import com.tinkerforge.BrickletJoystick;
     import com.tinkerforge.IPConnection;
+    import com.tinkerforge.BrickletJoystick;
 
     HOST = 'localhost';
     PORT = 4223;
-    UID = 'dmC'; % Change to your UID
+    UID = 'XYZ'; % Change to your UID
 
     ipcon = IPConnection(); % Create IP connection
-    js = BrickletJoystick(UID, ipcon); % Create device object
+    j = BrickletJoystick(UID, ipcon); % Create device object
 
     ipcon.connect(HOST, PORT); % Connect to brickd
     % Don't use device before ipcon is connected
 
-    % Get current position (returned as x, y coordinate)
-    pos = js.getPosition();
-    fprintf('Position(x): %g\n', pos.x);
-    fprintf('Position(y): %g\n', pos.y);
+    % Get current position
+    position = j.getPosition();
 
-    input('Press any key to exit...\n', 's');
+    fprintf('Position[X]: %i\n', position.x);
+    fprintf('Position[Y]: %i\n', position.y);
+
+    input('Press key to exit\n', 's');
     ipcon.disconnect();
 end

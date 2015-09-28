@@ -7,8 +7,8 @@
 #define PORT 4223
 #define UID "XYZ" // Change to your UID
 
-// Callback for x or y position outside of [-99..99]
-void cb_reached(int16_t x, int16_t y, void *user_data) {
+// Callback function for position reached callback
+void cb_position_reached(int16_t x, int16_t y, void *user_data) {
 	(void)user_data; // avoid unused parameter warning
 
 	if(y == 100) {
@@ -45,13 +45,13 @@ int main(void) {
 	// Get threshold callbacks with a debounce time of 0.2 seconds (200ms)
 	joystick_set_debounce_period(&j, 200);
 
-	// Register threshold reached callback to function cb_reached
+	// Register position reached callback to function cb_position_reached
 	joystick_register_callback(&j,
 	                           JOYSTICK_CALLBACK_POSITION_REACHED,
-	                           (void *)cb_reached,
+	                           (void *)cb_position_reached,
 	                           NULL);
 
-	// Configure threshold for "x or y value outside of [-99..99]"
+	// Configure threshold for position "outside of -99, -99 to 99, 99"
 	joystick_set_position_callback_threshold(&j, 'o', -99, 99, -99, 99);
 
 	printf("Press key to exit\n");

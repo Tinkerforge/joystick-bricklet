@@ -1,3 +1,4 @@
+using System;
 using Tinkerforge;
 
 class Example
@@ -6,15 +7,16 @@ class Example
 	private static int PORT = 4223;
 	private static string UID = "XYZ"; // Change to your UID
 
-	// Callback functions for pressed and released events
+	// Callback function for pressed callback
 	static void PressedCB(BrickletJoystick sender)
 	{
-		System.Console.WriteLine("Pressed");
+		Console.WriteLine("Pressed");
 	}
 
+	// Callback function for released callback
 	static void ReleasedCB(BrickletJoystick sender)
 	{
-		System.Console.WriteLine("Released");
+		Console.WriteLine("Released");
 	}
 
 	static void Main()
@@ -25,12 +27,14 @@ class Example
 		ipcon.Connect(HOST, PORT); // Connect to brickd
 		// Don't use device before ipcon is connected
 
-		// Register callbacks for pressed and released events
+		// Register pressed callback to function PressedCB
 		j.Pressed += PressedCB;
+
+		// Register released callback to function ReleasedCB
 		j.Released += ReleasedCB;
 
-		System.Console.WriteLine("Press enter to exit");
-		System.Console.ReadLine();
+		Console.WriteLine("Press enter to exit");
+		Console.ReadLine();
 		ipcon.Disconnect();
 	}
 }

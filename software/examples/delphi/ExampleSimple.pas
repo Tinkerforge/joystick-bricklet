@@ -24,7 +24,7 @@ var
   e: TExample;
 
 procedure TExample.Execute;
-var posX, posY: smallint;
+var x, y: smallint;
 begin
   { Create IP connection }
   ipcon := TIPConnection.Create;
@@ -36,9 +36,11 @@ begin
   ipcon.Connect(HOST, PORT);
   { Don't use device before ipcon is connected }
 
-  { Get current position (x and y value) }
-  j.GetPosition(posX, posY);
-  WriteLn(Format('Position: %d, %d', [posX, posY]));
+  { Get current position }
+  j.GetPosition(x, y);
+
+  WriteLn(Format('Position[X]: %d', [x]));
+  WriteLn(Format('Position[Y]: %d', [y]));
 
   WriteLn('Press key to exit');
   ReadLn;

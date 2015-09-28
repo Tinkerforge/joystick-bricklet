@@ -1,37 +1,36 @@
 Needs["NETLink`"]
-LoadNETAssembly["Tinkerforge",NotebookDirectory[]<>"../.."]
+LoadNETAssembly["Tinkerforge",NotebookDirectory[]<>"../../.."]
 
 host="localhost"
 port=4223
-uid="dmG"(* Change to your UID *)
+uid="XYZ"(*Change to your UID*)
 
-(* Create IPConnection and device object *)
+(*Create IPConnection and device object*)
 ipcon=NETNew["Tinkerforge.IPConnection"]
-js=NETNew["Tinkerforge.BrickletJoystick",uid,ipcon]
+j=NETNew["Tinkerforge.BrickletJoystick",uid,ipcon]
 ipcon@Connect[host,port]
 
-(* Get threshold callbacks with a debounce time of 0.2 seconds (200ms) *)
-js@SetDebouncePeriod[200]
+(*Get threshold callbacks with a debounce time of 0.2 seconds (200ms)*)
+j@SetDebouncePeriod[200]
 
-(* Callback for x or y position outside of[-99..99] *)
+(*Callback function for position reached callback*)
 PositionReachedCB[sender_,x_,y_]:=
  Module[{},
   If[y==100,Print["Top"]];
   If[y==-100,Print["Bottom"]];
   If[x==100,Print["Right"]];
   If[x==-100,Print["Left"]];
-  Print[""]
  ]
 
-AddEventHandler[js@PositionReached,PositionReachedCB]
+AddEventHandler[j@PositionReached,PositionReachedCB]
 
-(* Configure threshold for "x or y value outside of [-99..99]" *)
-option=BrickletJoystick`THRESHOLDUOPTIONUOUTSIDE
-js@SetPositionCallbackThreshold[option,-99,99,-99,99]
+(*Configure threshold for position "outside of -99, -99 to 99, 99"*)
+option=Tinkerforge`BrickletJoystick`THRESHOLDUOPTIONUOUTSIDE
+j@SetPositionCallbackThreshold[option,-99,99,-99,99]
 
 Input["Click OK to exit"]
 
-(* Clean up *)
+(*Clean up*)
 ipcon@Disconnect[]
-ReleaseNETObject[js]
+ReleaseNETObject[j]
 ReleaseNETObject[ipcon]

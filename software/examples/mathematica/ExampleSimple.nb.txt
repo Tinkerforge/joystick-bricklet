@@ -1,21 +1,24 @@
 Needs["NETLink`"]
-LoadNETAssembly["Tinkerforge",NotebookDirectory[]<>"../.."]
+LoadNETAssembly["Tinkerforge",NotebookDirectory[]<>"../../.."]
+
 host="localhost"
 port=4223
-uid="dmG"(* Change to your UID *)
+uid="XYZ"(*Change to your UID*)
 
-(* Create IPConnection and device object *)
+(*Create IPConnection and device object*)
 ipcon=NETNew["Tinkerforge.IPConnection"]
-js=NETNew["Tinkerforge.BrickletJoystick",uid,ipcon]
+j=NETNew["Tinkerforge.BrickletJoystick",uid,ipcon]
 ipcon@Connect[host,port]
 
 x=0;y=0
 
-(* Get current position (x and y value) *)
-js@GetPosition[x,y]
-Print["Position: "<>ToString[x]<>", "<>ToString[y]]
+(*Get current position*)
+j@GetPosition[x,y]
 
-(* Clean up *)
+Print["Position[X]: "<>ToString[x]]
+Print["Position[Y]: "<>ToString[y]]
+
+(*Clean up*)
 ipcon@Disconnect[]
-ReleaseNETObject[js]
+ReleaseNETObject[j]
 ReleaseNETObject[ipcon]

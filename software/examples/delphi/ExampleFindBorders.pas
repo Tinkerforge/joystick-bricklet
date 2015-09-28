@@ -12,7 +12,7 @@ type
     ipcon: TIPConnection;
     j: TBrickletJoystick;
   public
-    procedure ReachedCB(sender: TBrickletJoystick; const x: smallint; const y: smallint);
+    procedure PositionReachedCB(sender: TBrickletJoystick; const x: smallint; const y: smallint);
     procedure Execute;
   end;
 
@@ -24,8 +24,8 @@ const
 var
   e: TExample;
 
-{ Callback for x and y position outside of [-99..99] }
-procedure TExample.ReachedCB(sender: TBrickletJoystick; const x: smallint; const y: smallint);
+{ Callback procedure for position reached callback }
+procedure TExample.PositionReachedCB(sender: TBrickletJoystick; const x: smallint; const y: smallint);
 begin
   if (y = 100) then begin
     WriteLn('Top');
@@ -57,10 +57,10 @@ begin
   { Get threshold callbacks with a debounce time of 0.2 seconds (200ms) }
   j.SetDebouncePeriod(200);
 
-  { Register threshold reached callback to procedure ReachedCB }
-  j.OnPositionReached := {$ifdef FPC}@{$endif}ReachedCB;
+  { Register position reached callback to procedure PositionReachedCB }
+  j.OnPositionReached := {$ifdef FPC}@{$endif}PositionReachedCB;
 
-  { Configure threshold for "x or y value outside of [-99..99]" }
+  { Configure threshold for position "outside of -99, -99 to 99, 99" }
   j.SetPositionCallbackThreshold('o', -99, 99, -99, 99);
 
   WriteLn('Press key to exit');

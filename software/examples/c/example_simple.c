@@ -23,15 +23,15 @@ int main(void) {
 	}
 	// Don't use device before ipcon is connected
 
-	// Get current position (x and y value)
-	int16_t pos_x;
-	int16_t pos_y;
-	if(joystick_get_position(&j, &pos_x, &pos_y) < 0) {
-		fprintf(stderr, "Could not get value, probably timeout\n");
+	// Get current position
+	int16_t x, y;
+	if(joystick_get_position(&j, &x, &y) < 0) {
+		fprintf(stderr, "Could not get position, probably timeout\n");
 		return 1;
 	}
 
-	printf("Position: %d, %d\n", pos_x, pos_y);
+	printf("Position[X]: %d\n", x);
+	printf("Position[Y]: %d\n", y);
 
 	printf("Press key to exit\n");
 	getchar();

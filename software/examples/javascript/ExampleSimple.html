@@ -31,23 +31,24 @@
                     ipcon.disconnect();
                 }
                 ipcon = new Tinkerforge.IPConnection(); // Create IP connection
-                var js = new Tinkerforge.BrickletJoystick(UID, ipcon); // Create device object
+                var j = new Tinkerforge.BrickletJoystick(UID, ipcon); // Create device object
                 ipcon.connect(HOST, PORT,
                     function(error) {
-                        textArea.value += 'Error: '+error+ '\n';
+                        textArea.value += 'Error: ' + error + '\n';
                     }
                 ); // Connect to brickd
                 // Don't use device before ipcon is connected
 
                 ipcon.on(Tinkerforge.IPConnection.CALLBACK_CONNECTED,
-                    function(connectReason) {
+                    function (connectReason) {
                         // Get current position
-                        js.getPosition(
-                            function(position) {
-                                textArea.value += 'Position: '+position+'\n';
+                        j.getPosition(
+                            function (x, y) {
+                                textArea.value += 'Position[X]: ' + x + '\n';
+                                textArea.value += 'Position[Y]: ' + y + '\n';
                             },
-                            function(error) {
-                                textArea.value += 'Error: '+error+'\n';
+                            function (error) {
+                                textArea.value += 'Error: ' + error + '\n';
                             }
                         );
                     }

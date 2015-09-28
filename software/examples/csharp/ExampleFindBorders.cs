@@ -1,3 +1,4 @@
+using System;
 using Tinkerforge;
 
 class Example
@@ -6,28 +7,28 @@ class Example
 	private static int PORT = 4223;
 	private static string UID = "XYZ"; // Change to your UID
 
-	// Callback for x or y position outside of [-99..99]
-	static void ReachedCB(BrickletJoystick sender, short x, short y)
+	// Callback function for position reached callback
+	static void PositionReachedCB(BrickletJoystick sender, short x, short y)
 	{
 		if(y == 100)
 		{
-			System.Console.WriteLine("Top");
+			Console.WriteLine("Top");
 		}
 		else if(y == -100)
 		{
-			System.Console.WriteLine("Bottom");
+			Console.WriteLine("Bottom");
 		}
 
 		if(x == 100)
 		{
-			System.Console.WriteLine("Right");
+			Console.WriteLine("Right");
 		}
 		else if(x == -100)
 		{
-			System.Console.WriteLine("Left");
+			Console.WriteLine("Left");
 		}
 
-		System.Console.WriteLine("");
+		Console.WriteLine("");
 	}
 
 	static void Main()
@@ -41,14 +42,14 @@ class Example
 		// Get threshold callbacks with a debounce time of 0.2 seconds (200ms)
 		j.SetDebouncePeriod(200);
 
-		// Register threshold reached callback to function ReachedCB
-		j.PositionReached += ReachedCB;
+		// Register position reached callback to function PositionReachedCB
+		j.PositionReached += PositionReachedCB;
 
-		// Configure threshold for "x or y value outside of [-99..99]"
+		// Configure threshold for position "outside of -99, -99 to 99, 99"
 		j.SetPositionCallbackThreshold('o', -99, 99, -99, 99);
 
-		System.Console.WriteLine("Press enter to exit");
-		System.Console.ReadLine();
+		Console.WriteLine("Press enter to exit");
+		Console.ReadLine();
 		ipcon.Disconnect();
 	}
 }

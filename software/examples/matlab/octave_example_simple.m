@@ -3,27 +3,28 @@ function octave_example_simple()
 
     HOST = "localhost";
     PORT = 4223;
-    UID = "aQ2"; % Change to your UID
+    UID = "XYZ"; % Change to your UID
 
     ipcon = java_new("com.tinkerforge.IPConnection"); % Create IP connection
-    js = java_new("com.tinkerforge.BrickletJoystick", UID, ipcon); % Create device object
+    j = java_new("com.tinkerforge.BrickletJoystick", UID, ipcon); % Create device object
 
     ipcon.connect(HOST, PORT); % Connect to brickd
     % Don't use device before ipcon is connected
 
-    % Get current position (returned as x, y coordinate)
-    pos = js.getPosition();
-    fprintf("Position(x): %d\n", short2int(pos.x));
-    fprintf("Position(y): %d\n", short2int(pos.y));
+    % Get current position
+    position = j.getPosition();
 
-    input("Press any key to exit...\n", "s");
+    fprintf("Position[X]: %d\n", java2int(position.x));
+    fprintf("Position[Y]: %d\n", java2int(position.y));
+
+    input("Press key to exit\n", "s");
     ipcon.disconnect();
 end
 
-function int = short2int(short)
+function int = java2int(value)
     if compare_versions(version(), "3.8", "<=")
-        int = short.intValue();
+        int = value.intValue();
     else
-        int = short;
+        int = value;
     end
 end

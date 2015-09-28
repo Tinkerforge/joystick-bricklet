@@ -4,27 +4,30 @@ function matlab_example_callback()
 
     HOST = 'localhost';
     PORT = 4223;
-    UID = 'dmC'; % Change to your UID
+    UID = 'XYZ'; % Change to your UID
 
     ipcon = IPConnection(); % Create IP connection
-    js = BrickletJoystick(UID, ipcon); % Create device object
+    j = BrickletJoystick(UID, ipcon); % Create device object
 
     ipcon.connect(HOST, PORT); % Connect to brickd
     % Don't use device before ipcon is connected
 
-    % Register callbacks for pressed and released events
-    set(js, 'PressedCallback', @(h, e) cb_pressed(e));
-    set(js, 'ReleasedCallback', @(h, e) cb_released(e));
+    % Register pressed callback to function cb_pressed
+    set(j, 'PressedCallback', @(h, e) cb_pressed(e));
 
-    input('Press any key to exit...\n', 's');
+    % Register released callback to function cb_released
+    set(j, 'ReleasedCallback', @(h, e) cb_released(e));
+
+    input('Press key to exit\n', 's');
     ipcon.disconnect();
 end
 
-% Callback function for pressed and released events 
+% Callback function for pressed callback
 function cb_pressed(e)
     fprintf('Pressed\n');
 end
 
+% Callback function for released callback
 function cb_released(e)
     fprintf('Released\n');
 end

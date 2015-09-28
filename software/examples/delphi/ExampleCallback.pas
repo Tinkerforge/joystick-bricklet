@@ -25,12 +25,13 @@ const
 var
   e: TExample;
 
-{ Callback function for pressed and released events }
+{ Callback procedure for pressed callback }
 procedure TExample.PressedCB(sender: TBrickletJoystick);
 begin
   WriteLn('Pressed');
 end;
 
+{ Callback procedure for released callback }
 procedure TExample.ReleasedCB(sender: TBrickletJoystick);
 begin
   WriteLn('Released');
@@ -48,8 +49,10 @@ begin
   ipcon.Connect(HOST, PORT);
   { Don't use device before ipcon is connected }
 
-  { Register callbacks for pressed and released events }
+  { Register pressed callback to procedure PressedCB }
   j.OnPressed := {$ifdef FPC}@{$endif}PressedCB;
+
+  { Register released callback to procedure ReleasedCB }
   j.OnReleased := {$ifdef FPC}@{$endif}ReleasedCB;
 
   WriteLn('Press key to exit');

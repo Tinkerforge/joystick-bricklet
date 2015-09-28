@@ -16,10 +16,12 @@ j = BrickletJoystick.new UID, ipcon # Create device object
 ipcon.connect HOST, PORT # Connect to brickd
 # Don't use device before ipcon is connected
 
-# Register callbacks for pressed and released events
+# Register pressed callback
 j.register_callback(BrickletJoystick::CALLBACK_PRESSED) do
   puts 'Pressed'
 end
+
+# Register released callback
 j.register_callback(BrickletJoystick::CALLBACK_RELEASED) do
   puts 'Released'
 end

@@ -13,11 +13,12 @@ my $j = Tinkerforge::BrickletJoystick->new(&UID, $ipcon); # Create device object
 $ipcon->connect(&HOST, &PORT); # Connect to brickd
 # Don't use device before ipcon is connected
 
-# Get current position (returned as tuple x,y)
+# Get current position
 my ($x, $y) = $j->get_position();
-print "Position[x]: $x\n";
-print "Position[y]: $y\n";
 
-print "Press any key to exit...\n";
+print "Position[X]: $x\n";
+print "Position[Y]: $y\n";
+
+print "Press key to exit\n";
 <STDIN>;
 $ipcon->disconnect();
