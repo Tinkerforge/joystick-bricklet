@@ -7,7 +7,8 @@ Module ExampleFindBorders
     Const UID As String = "XYZ" ' Change to your UID
 
     ' Callback subroutine for position reached callback
-    Sub PositionReachedCB(ByVal sender As BrickletJoystick, ByVal x As Short, ByVal y As Short)
+    Sub PositionReachedCB(ByVal sender As BrickletJoystick, _
+                          ByVal x As Short, ByVal y As Short)
         If y = 100 Then
             Console.WriteLine("Top")
         Else If y = -100 Then
