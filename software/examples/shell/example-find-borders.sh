@@ -1,7 +1,7 @@
 #!/bin/sh
 # Connects to localhost:4223 by default, use --host and --port to change this
 
-uid=XYZ # Change to your UID
+uid=XYZ # Change XYZ to the UID of your Joystick Bricklet
 
 # Get threshold callbacks with a debounce time of 0.2 seconds (200ms)
 tinkerforge call joystick-bricklet $uid set-debounce-period 200

@@ -4,11 +4,11 @@ Imports Tinkerforge
 Module ExampleFindBorders
     Const HOST As String = "localhost"
     Const PORT As Integer = 4223
-    Const UID As String = "XYZ" ' Change to your UID
+    Const UID As String = "XYZ" ' Change XYZ to the UID of your Joystick Bricklet
 
     ' Callback subroutine for position reached callback
-    Sub PositionReachedCB(ByVal sender As BrickletJoystick, _
-                          ByVal x As Short, ByVal y As Short)
+    Sub PositionReachedCB(ByVal sender As BrickletJoystick, ByVal x As Short, _
+                          ByVal y As Short)
         If y = 100 Then
             Console.WriteLine("Top")
         Else If y = -100 Then

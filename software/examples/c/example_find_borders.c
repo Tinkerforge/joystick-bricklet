@@ -5,7 +5,7 @@
 
 #define HOST "localhost"
 #define PORT 4223
-#define UID "XYZ" // Change to your UID
+#define UID "XYZ" // Change XYZ to the UID of your Joystick Bricklet
 
 // Callback function for position reached callback
 void cb_position_reached(int16_t x, int16_t y, void *user_data) {

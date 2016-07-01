@@ -12,20 +12,22 @@ type
     ipcon: TIPConnection;
     j: TBrickletJoystick;
   public
-    procedure PositionReachedCB(sender: TBrickletJoystick; const x: smallint; const y: smallint);
+    procedure PositionReachedCB(sender: TBrickletJoystick; const x: smallint;
+                                const y: smallint);
     procedure Execute;
   end;
 
 const
   HOST = 'localhost';
   PORT = 4223;
-  UID = 'XYZ'; { Change to your UID }
+  UID = 'XYZ'; { Change XYZ to the UID of your Joystick Bricklet }
 
 var
   e: TExample;
 
 { Callback procedure for position reached callback }
-procedure TExample.PositionReachedCB(sender: TBrickletJoystick; const x: smallint; const y: smallint);
+procedure TExample.PositionReachedCB(sender: TBrickletJoystick; const x: smallint;
+                                     const y: smallint);
 begin
   if (y = 100) then begin
     WriteLn('Top');

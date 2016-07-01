@@ -5,7 +5,7 @@ use Tinkerforge::BrickletJoystick;
 
 use constant HOST => 'localhost';
 use constant PORT => 4223;
-use constant UID => 'XYZ'; # Change to your UID
+use constant UID => 'XYZ'; # Change XYZ to the UID of your Joystick Bricklet
 
 # Callback subroutine for pressed callback
 sub cb_pressed

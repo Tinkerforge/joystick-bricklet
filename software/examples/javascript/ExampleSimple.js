@@ -2,7 +2,7 @@ var Tinkerforge = require('tinkerforge');
 
 var HOST = 'localhost';
 var PORT = 4223;
-var UID = 'XYZ'; // Change to your UID
+var UID = 'XYZ'; // Change XYZ to the UID of your Joystick Bricklet
 
 var ipcon = new Tinkerforge.IPConnection(); // Create IP connection
 var j = new Tinkerforge.BrickletJoystick(UID, ipcon); // Create device object

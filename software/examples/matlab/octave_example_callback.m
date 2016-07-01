@@ -3,7 +3,7 @@ function octave_example_callback()
 
     HOST = "localhost";
     PORT = 4223;
-    UID = "XYZ"; % Change to your UID
+    UID = "XYZ"; % Change XYZ to the UID of your Joystick Bricklet
 
     ipcon = java_new("com.tinkerforge.IPConnection"); % Create IP connection
     j = java_new("com.tinkerforge.BrickletJoystick", UID, ipcon); % Create device object

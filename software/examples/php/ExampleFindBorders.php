@@ -8,7 +8,7 @@ use Tinkerforge\BrickletJoystick;
 
 const HOST = 'localhost';
 const PORT = 4223;
-const UID = 'XYZ'; // Change to your UID
+const UID = 'XYZ'; // Change XYZ to the UID of your Joystick Bricklet
 
 // Callback function for position reached callback
 function cb_positionReached($x, $y)
