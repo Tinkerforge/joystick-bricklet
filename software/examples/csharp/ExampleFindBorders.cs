@@ -43,7 +43,7 @@ class Example
 		j.SetDebouncePeriod(200);
 
 		// Register position reached callback to function PositionReachedCB
-		j.PositionReached += PositionReachedCB;
+		j.PositionReachedCallback += PositionReachedCB;
 
 		// Configure threshold for position "outside of -99, -99 to 99, 99"
 		j.SetPositionCallbackThreshold('o', -99, 99, -99, 99);
