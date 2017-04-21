@@ -20,7 +20,7 @@ tinkerforge dispatch joystick-bricklet $uid position-reached\
             fi" &
 
 # Configure threshold for position "outside of -99, -99 to 99, 99"
-tinkerforge call joystick-bricklet $uid set-position-callback-threshold outside -99 99 -99 99
+tinkerforge call joystick-bricklet $uid set-position-callback-threshold threshold-option-outside -99 99 -99 99
 
 echo "Press key to exit"; read dummy
 
