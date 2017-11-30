@@ -24,10 +24,10 @@ Module ExampleCallback
         ' Don't use device before ipcon is connected
 
         ' Register pressed callback to subroutine PressedCB
-        AddHandler j.Pressed, AddressOf PressedCB
+        AddHandler j.PressedCallback, AddressOf PressedCB
 
         ' Register released callback to subroutine ReleasedCB
-        AddHandler j.Released, AddressOf ReleasedCB
+        AddHandler j.ReleasedCallback, AddressOf ReleasedCB
 
         Console.WriteLine("Press key to exit")
         Console.ReadLine()

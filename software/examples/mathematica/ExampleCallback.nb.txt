@@ -13,12 +13,12 @@ ipcon@Connect[host,port]
 (*Callback function for pressed callback*)
 PressedCB[sender_]:=
  Print["Pressed"]
-AddEventHandler[j@Pressed,PressedCB]
+AddEventHandler[j@PressedCallback,PressedCB]
 
 (*Callback function for released callback*)
 ReleasedCB[sender_]:=
  Print["Released"]
-AddEventHandler[j@Released,ReleasedCB]
+AddEventHandler[j@ReleasedCallback,ReleasedCB]
 
 Input["Click OK to exit"]
 

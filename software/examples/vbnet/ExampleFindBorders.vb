@@ -35,7 +35,7 @@ Module ExampleFindBorders
         j.SetDebouncePeriod(200)
 
         ' Register position reached callback to subroutine PositionReachedCB
-        AddHandler j.PositionReached, AddressOf PositionReachedCB
+        AddHandler j.PositionReachedCallback, AddressOf PositionReachedCB
 
         ' Configure threshold for position "outside of -99, -99 to 99, 99"
         j.SetPositionCallbackThreshold("o"C, -99, 99, -99, 99)

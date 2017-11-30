@@ -22,7 +22,7 @@ PositionReachedCB[sender_,x_,y_]:=
   If[x==-100,Print["Left"]];
  ]
 
-AddEventHandler[j@PositionReached,PositionReachedCB]
+AddEventHandler[j@PositionReachedCallback,PositionReachedCB]
 
 (*Configure threshold for position "outside of -99, -99 to 99, 99"*)
 option=Tinkerforge`BrickletJoystick`THRESHOLDUOPTIONUOUTSIDE
