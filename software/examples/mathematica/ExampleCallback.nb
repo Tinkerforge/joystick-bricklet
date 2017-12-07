@@ -1,129 +1,40 @@
-(*CacheID: 234*)
-(* Internal cache information:
-NotebookFileLineBreakTest
-NotebookFileLineBreakTest
-NotebookDataPosition[         0,          0]
-NotebookDataLength[      5307,        128]
-NotebookOptionsPosition[      4881,        107]
-NotebookOutlinePosition[      5214,        122]
-CellTagsIndexPosition[      5171,        119]
-WindowFrame->Normal*)
-
-(* Beginning of Notebook Content *)
 Notebook[{
-Cell[BoxData[{
- RowBox[{"Needs", "[", "\"\<NETLink`\>\"", "]"}], "\[IndentingNewLine]", 
- RowBox[{"LoadNETAssembly", "[", 
-  RowBox[{"\"\<Tinkerforge\>\"", ",", 
-   RowBox[{
-    RowBox[{"NotebookDirectory", "[", "]"}], "<>", "\"\<../../..\>\""}]}], 
-  "]"}]}], "Input",
- CellChangeTimes->{
-  3.6001754662962093`*^9, {3.600500602461578*^9, 3.600500602779945*^9}, {
-   3.600500676409213*^9, 3.600500692857397*^9}, {3.600506671115094*^9, 
-   3.600506671529955*^9}, 3.652439098721244*^9}],
-
-Cell[BoxData[{
- RowBox[{"host", "=", "\"\<localhost\>\""}], "\n", 
- RowBox[{"port", "=", "4223"}], "\n", 
- RowBox[{
-  RowBox[{"uid", "=", "\"\<XYZ\>\""}], 
-  RowBox[{"(*", 
-   RowBox[{"Change", " ", "to", " ", "your", " ", "UID"}], "*)"}], "\n", 
-  "\[IndentingNewLine]", 
-  RowBox[{"(*", 
-   RowBox[{
-   "Create", " ", "IPConnection", " ", "and", " ", "device", " ", "object"}], 
-   "*)"}]}], "\[IndentingNewLine]", 
- RowBox[{"ipcon", "=", 
-  RowBox[{"NETNew", "[", "\"\<Tinkerforge.IPConnection\>\"", "]"}]}], "\n", 
- RowBox[{"j", "=", 
-  RowBox[{"NETNew", "[", 
-   RowBox[{"\"\<Tinkerforge.BrickletJoystick\>\"", ",", "uid", ",", "ipcon"}],
-    "]"}]}], "\n", 
- RowBox[{
-  RowBox[{"ipcon", "@", 
-   RowBox[{"Connect", "[", 
-    RowBox[{"host", ",", "port"}], "]"}]}], "\n", "\[IndentingNewLine]", 
-  RowBox[{"(*", 
-   RowBox[{
-   "Callback", " ", "function", " ", "for", " ", "pressed", " ", "callback"}],
-    "*)"}]}], "\[IndentingNewLine]", 
- RowBox[{
-  RowBox[{"PressedCB", "[", "sender_", "]"}], ":=", "\[IndentingNewLine]", 
-  RowBox[{"Print", "[", "\"\<Pressed\>\"", "]"}]}], "\n", 
- RowBox[{
-  RowBox[{"AddEventHandler", "[", 
-   RowBox[{
-    RowBox[{"j", "@", "Pressed"}], ",", "PressedCB"}], "]"}], 
-  "\[IndentingNewLine]", "\[IndentingNewLine]", 
-  RowBox[{"(*", 
-   RowBox[{
-   "Callback", " ", "function", " ", "for", " ", "released", " ", 
-    "callback"}], "*)"}]}], "\n", 
- RowBox[{
-  RowBox[{"ReleasedCB", "[", "sender_", "]"}], ":=", "\[IndentingNewLine]", 
-  RowBox[{"Print", "[", "\"\<Released\>\"", "]"}]}], "\n", 
- RowBox[{
-  RowBox[{"AddEventHandler", "[", 
-   RowBox[{
-    RowBox[{"j", "@", "Released"}], ",", "ReleasedCB"}], "]"}], 
-  "\[IndentingNewLine]"}], "\n", 
- RowBox[{
-  RowBox[{"Input", "[", "\"\<Click OK to exit\>\"", "]"}], 
-  "\[IndentingNewLine]", "\n", 
-  RowBox[{"(*", 
-   RowBox[{"Clean", " ", "up"}], "*)"}]}], "\[IndentingNewLine]", 
- RowBox[{"ipcon", "@", 
-  RowBox[{"Disconnect", "[", "]"}]}], "\n", 
- RowBox[{"ReleaseNETObject", "[", "j", "]"}], "\n", 
- RowBox[{"ReleaseNETObject", "[", "ipcon", "]"}]}], "Input",
- CellChangeTimes->{{3.600075175574196*^9, 3.600075177574486*^9}, {
-   3.600075518821967*^9, 3.60007554243471*^9}, {3.600075580562348*^9, 
-   3.600075669308506*^9}, {3.600075705822371*^9, 3.600075921974015*^9}, {
-   3.6000760067507343`*^9, 3.600076009622583*^9}, {3.600077792659996*^9, 
-   3.600077795613958*^9}, {3.600077854705127*^9, 3.600077855342334*^9}, {
-   3.600090981053762*^9, 3.6000909897413397`*^9}, {3.600091048393783*^9, 
-   3.600091071325759*^9}, {3.6000911068928633`*^9, 3.6000911072763557`*^9}, {
-   3.600091413237206*^9, 3.600091428847453*^9}, {3.600091480127982*^9, 
-   3.60009150669311*^9}, {3.6000915673213387`*^9, 3.6000915678002653`*^9}, {
-   3.600092307925643*^9, 3.600092314241997*^9}, {3.600149020784099*^9, 
-   3.6001491107582273`*^9}, {3.600149174456699*^9, 3.6001491869018793`*^9}, {
-   3.600159325847857*^9, 3.6001593470369997`*^9}, {3.600159400246332*^9, 
-   3.6001594542623587`*^9}, {3.60015948914436*^9, 3.600159496930849*^9}, {
-   3.600159548265239*^9, 3.6001595658565407`*^9}, {3.600159646964334*^9, 
-   3.6001596688233643`*^9}, {3.600159762046418*^9, 3.600159781293133*^9}, {
-   3.6001598436646423`*^9, 3.600159856693261*^9}, {3.600161303594071*^9, 
-   3.6001613068538027`*^9}, {3.600161380323941*^9, 3.600161392339135*^9}, {
-   3.600161477386764*^9, 3.6001614810099792`*^9}, {3.600161583541798*^9, 
-   3.600161609048029*^9}, {3.600161653222643*^9, 3.600161653648093*^9}, {
-   3.600161726882321*^9, 3.60016174790372*^9}, {3.6001754564686623`*^9, 
-   3.600175502609065*^9}, {3.600175580233206*^9, 3.600175623073368*^9}, 
-   3.600175678839476*^9, {3.600175722467629*^9, 3.600175827250032*^9}, {
-   3.600175902712735*^9, 3.600175913862976*^9}, {3.600500612855398*^9, 
-   3.600500628060698*^9}, {3.6005006752348833`*^9, 3.600500675854513*^9}, {
-   3.6005062634776382`*^9, 3.600506377395418*^9}, {3.6005066676479816`*^9, 
-   3.6005066680276537`*^9}, {3.6524390946053658`*^9, 3.65243910447964*^9}}]
-},
-WindowSize->{1136, 867},
-WindowMargins->{{608, 174}, {52, Automatic}},
-FrontEndVersion->"9.0 for Linux x86 (64-bit) (November 20, 2012)",
-StyleDefinitions->"Default.nb"
-]
-(* End of Notebook Content *)
-
-(* Internal cache information *)
-(*CellTagsOutline
-CellTagsIndex->{}
-*)
-(*CellTagsIndex
-CellTagsIndex->{}
-*)
-(*NotebookFileOutline
-Notebook[{
-Cell[400, 13, 484, 10, 55, "Input"],
-Cell[887, 25, 3990, 80, 561, "Input"]
-}
-]
-*)
-
+ Cell[
+  BoxData[{
+   RowBox[{"Needs", "[", "\"\<NETLink`\>\"", "]"}],
+   RowBox[{"LoadNETAssembly", "[", RowBox[{"\"\<Tinkerforge\>\"", ",", RowBox[{RowBox[{"NotebookDirectory", "[", "]"}], "<>", "\"\<../../..\>\""}]}], "]"}]
+  }], "Input"
+ ],
+ Cell[
+  BoxData[{
+   RowBox[{"host", "=", "\"\<localhost\>\""}],
+   RowBox[{"port", "=", "4223"}],
+   RowBox[{"uid", "=", "\"\<XYZ\>\"", RowBox[{"(*", "Change XYZ to the UID of your Joystick Bricklet", "*)"}]}],
+   RowBox[{"
+"}],
+   RowBox[{"(*", "Create IPConnection and device object", "*)"}],
+   RowBox[{"ipcon", "=", RowBox[{"NETNew", "[", "\"\<Tinkerforge.IPConnection\>\"", "]"}]}],
+   RowBox[{"j", "=", RowBox[{"NETNew", "[", RowBox[{"\"\<Tinkerforge.BrickletJoystick\>\"", ",", "uid", ",", "ipcon"}], "]"}]}],
+   RowBox[{"ipcon", "@", RowBox[{"Connect", "[", RowBox[{"host", ",", "port"}], "]"}]}],
+   RowBox[{"
+"}],
+   RowBox[{"(*", "Callback function for pressed callback", "*)"}],
+   RowBox[{RowBox[{"PressedCB", "[", "sender_", "]"}], ":=", "\[IndentingNewLine]", RowBox[{"Print", "[", "\"\<Pressed\>\"", "]"}]}],
+   RowBox[{"AddEventHandler", "[", RowBox[{RowBox[{"j", "@", "PressedCallback"}], ",", "PressedCB"}], "]"}],
+   RowBox[{"
+"}],
+   RowBox[{"(*", "Callback function for released callback", "*)"}],
+   RowBox[{RowBox[{"ReleasedCB", "[", "sender_", "]"}], ":=", "\[IndentingNewLine]", RowBox[{"Print", "[", "\"\<Released\>\"", "]"}]}],
+   RowBox[{"AddEventHandler", "[", RowBox[{RowBox[{"j", "@", "ReleasedCallback"}], ",", "ReleasedCB"}], "]"}],
+   RowBox[{"
+"}],
+   RowBox[{"Input", "[", "\"\<Click OK to exit\>\"", "]"}],
+   RowBox[{"
+"}],
+   RowBox[{"(*", "Clean up", "*)"}],
+   RowBox[{"ipcon", "@", RowBox[{"Disconnect", "[", "]"}]}],
+   RowBox[{"ReleaseNETObject", "[", "j", "]"}],
+   RowBox[{"ReleaseNETObject", "[", "ipcon", "]"}]
+  }], "Input"
+ ]
+}]
