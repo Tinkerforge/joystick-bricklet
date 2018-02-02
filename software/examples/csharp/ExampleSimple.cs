@@ -19,8 +19,8 @@ class Example
 		short x, y;
 		j.GetPosition(out x, out y);
 
-		Console.WriteLine("Position[X]: " + x);
-		Console.WriteLine("Position[Y]: " + y);
+		Console.WriteLine("Position [X]: " + x);
+		Console.WriteLine("Position [Y]: " + y);
 
 		Console.WriteLine("Press enter to exit");
 		Console.ReadLine();

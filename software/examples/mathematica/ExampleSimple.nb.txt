@@ -15,8 +15,8 @@ x=0;y=0
 (*Get current position*)
 j@GetPosition[x,y]
 
-Print["Position[X]: "<>ToString[x]]
-Print["Position[Y]: "<>ToString[y]]
+Print["Position [X]: "<>ToString[x]]
+Print["Position [Y]: "<>ToString[y]]
 
 (*Clean up*)
 ipcon@Disconnect[]

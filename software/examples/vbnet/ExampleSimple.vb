@@ -14,13 +14,12 @@ Module ExampleSimple
         ' Don't use device before ipcon is connected
 
         ' Get current position
-        Dim x As Short
-        Dim y As Short
+        Dim x, y As Short
 
         j.GetPosition(x, y)
 
-        Console.WriteLine("Position[X]: " + x.ToString())
-        Console.WriteLine("Position[Y]: " + y.ToString())
+        Console.WriteLine("Position [X]: " + x.ToString())
+        Console.WriteLine("Position [Y]: " + y.ToString())
 
         Console.WriteLine("Press key to exit")
         Console.ReadLine()

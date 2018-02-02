@@ -16,11 +16,11 @@ j = BrickletJoystick.new UID, ipcon # Create device object
 ipcon.connect HOST, PORT # Connect to brickd
 # Don't use device before ipcon is connected
 
-# Get current position (returned as [x, y])
+# Get current position as [x, y]
 position = j.get_position
 
-puts "Position[X]: #{position[0]}"
-puts "Position[Y]: #{position[1]}"
+puts "Position [X]: #{position[0]}"
+puts "Position [Y]: #{position[1]}"
 
 puts 'Press key to exit'
 $stdin.gets

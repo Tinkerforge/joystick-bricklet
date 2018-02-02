@@ -19,8 +19,8 @@ ipcon.on(Tinkerforge.IPConnection.CALLBACK_CONNECTED,
         // Get current position
         j.getPosition(
             function (x, y) {
-                console.log('Position[X]: ' + x);
-                console.log('Position[Y]: ' + y);
+                console.log('Position [X]: ' + x);
+                console.log('Position [Y]: ' + y);
             },
             function (error) {
                 console.log('Error: ' + error);

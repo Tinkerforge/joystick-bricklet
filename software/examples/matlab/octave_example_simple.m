@@ -14,8 +14,8 @@ function octave_example_simple()
     % Get current position
     position = j.getPosition();
 
-    fprintf("Position[X]: %d\n", java2int(position.x));
-    fprintf("Position[Y]: %d\n", java2int(position.y));
+    fprintf("Position [X]: %d\n", java2int(position.x));
+    fprintf("Position [Y]: %d\n", java2int(position.y));
 
     input("Press key to exit\n", "s");
     ipcon.disconnect();

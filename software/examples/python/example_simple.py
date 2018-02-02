@@ -18,8 +18,8 @@ if __name__ == "__main__":
     # Get current position
     x, y = j.get_position()
 
-    print("Position[X]: " + str(x))
-    print("Position[Y]: " + str(y))
+    print("Position [X]: " + str(x))
+    print("Position [Y]: " + str(y))
 
     raw_input("Press key to exit\n") # Use input() in Python 3
     ipcon.disconnect()

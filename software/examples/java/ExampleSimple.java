@@ -21,8 +21,8 @@ public class ExampleSimple {
 		// Get current position
 		Position position = j.getPosition(); // Can throw com.tinkerforge.TimeoutException
 
-		System.out.println("Position[X]: " + position.x);
-		System.out.println("Position[Y]: " + position.y);
+		System.out.println("Position [X]: " + position.x);
+		System.out.println("Position [Y]: " + position.y);
 
 		System.out.println("Press key to exit"); System.in.read();
 		ipcon.disconnect();

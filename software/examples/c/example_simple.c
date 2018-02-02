@@ -30,8 +30,8 @@ int main(void) {
 		return 1;
 	}
 
-	printf("Position[X]: %d\n", x);
-	printf("Position[Y]: %d\n", y);
+	printf("Position [X]: %d\n", x);
+	printf("Position [Y]: %d\n", y);
 
 	printf("Press key to exit\n");
 	getchar();

@@ -16,8 +16,8 @@ $ipcon->connect(&HOST, &PORT); # Connect to brickd
 # Get current position
 my ($x, $y) = $j->get_position();
 
-print "Position[X]: $x\n";
-print "Position[Y]: $y\n";
+print "Position [X]: $x\n";
+print "Position [Y]: $y\n";
 
 print "Press key to exit\n";
 <STDIN>;

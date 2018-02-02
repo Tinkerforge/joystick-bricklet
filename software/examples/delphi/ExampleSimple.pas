@@ -39,8 +39,8 @@ begin
   { Get current position }
   j.GetPosition(x, y);
 
-  WriteLn(Format('Position[X]: %d', [x]));
-  WriteLn(Format('Position[Y]: %d', [y]));
+  WriteLn(Format('Position [X]: %d', [x]));
+  WriteLn(Format('Position [Y]: %d', [y]));
 
   WriteLn('Press key to exit');
   ReadLn;

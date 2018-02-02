@@ -15,8 +15,8 @@ function matlab_example_simple()
     % Get current position
     position = j.getPosition();
 
-    fprintf('Position[X]: %i\n', position.x);
-    fprintf('Position[Y]: %i\n', position.y);
+    fprintf('Position [X]: %i\n', position.x);
+    fprintf('Position [Y]: %i\n', position.y);
 
     input('Press key to exit\n', 's');
     ipcon.disconnect();
