@@ -10,9 +10,8 @@ ipcon=NETNew["Tinkerforge.IPConnection"]
 j=NETNew["Tinkerforge.BrickletJoystick",uid,ipcon]
 ipcon@Connect[host,port]
 
-x=0;y=0
-
 (*Get current position*)
+x=0;y=0
 j@GetPosition[x,y]
 
 Print["Position [X]: "<>ToString[x]]
