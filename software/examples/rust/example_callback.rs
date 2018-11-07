@@ -12,10 +12,10 @@ fn main() -> Result<(), Box<dyn Error>> {
     ipcon.connect((HOST, PORT)).recv()??; // Connect to brickd.
                                           // Don't use device before ipcon is connected.
 
-    // Create receiver for pressed events.
-    let pressed_receiver = j.get_pressed_receiver();
+    let pressed_receiver = j.get_pressed_callback_receiver();
 
-    // Spawn thread to handle received events. This thread ends when the `j` object
+    // Spawn thread to handle received callback messages.
+    // This thread ends when the `j` object
     // is dropped, so there is no need for manual cleanup.
     thread::spawn(move || {
         for pressed in pressed_receiver {
@@ -23,10 +23,10 @@ fn main() -> Result<(), Box<dyn Error>> {
         }
     });
 
-    // Create receiver for released events.
-    let released_receiver = j.get_released_receiver();
+    let released_receiver = j.get_released_callback_receiver();
 
-    // Spawn thread to handle received events. This thread ends when the `j` object
+    // Spawn thread to handle received callback messages.
+    // This thread ends when the `j` object
     // is dropped, so there is no need for manual cleanup.
     thread::spawn(move || {
         for released in released_receiver {

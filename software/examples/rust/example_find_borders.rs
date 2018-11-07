@@ -15,9 +15,10 @@ fn main() -> Result<(), Box<dyn Error>> {
     // Get threshold receivers with a debounce time of 0.2 seconds (200ms)
     j.set_debounce_period(200);
 
-    //Create receiver for position reached events.
-    let position_reached_receiver = j.get_position_reached_receiver();
-    // Spawn thread to handle received events. This thread ends when the j
+    let position_reached_receiver = j.get_position_reached_callback_receiver();
+    
+    // Spawn thread to handle received events.
+    // This thread ends when the `j`
     // is dropped, so there is no need for manual cleanup.
     thread::spawn(move || {
         for position_reached in position_reached_receiver {
