@@ -14,10 +14,10 @@ fn main() -> Result<(), Box<dyn Error>> {
                                           // Don't use device before ipcon is connected.
 
     // Get current position.
-    let get_position_result = j.get_position().recv()?;
+    let position = j.get_position().recv()?;
 
-    println!("Position [X]: {}", get_position_result.x);
-    println!("Position [Y]: {}", get_position_result.y);
+    println!("Position [X]: {}", position.x);
+    println!("Position [Y]: {}", position.y);
 
     println!("Press enter to exit.");
     let mut _input = String::new();
