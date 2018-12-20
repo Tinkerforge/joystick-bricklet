@@ -16,7 +16,7 @@ fn main() -> Result<(), Box<dyn Error>> {
     j.set_debounce_period(200);
 
     let position_reached_receiver = j.get_position_reached_callback_receiver();
-    
+
     // Spawn thread to handle received events.
     // This thread ends when the `j`
     // is dropped, so there is no need for manual cleanup.
