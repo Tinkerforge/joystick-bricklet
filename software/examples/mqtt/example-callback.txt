@@ -1,0 +1,11 @@
+
+
+# Change XYZ to the UID of your Joystick Bricklet
+
+setup:
+	# Handle incoming pressed callbacks
+	subscribe to tinkerforge/callback/joystick_bricklet/XYZ/pressed
+	publish '{"register": true}' to tinkerforge/register/joystick_bricklet/XYZ/pressed # Register pressed callback
+	# Handle incoming released callbacks
+	subscribe to tinkerforge/callback/joystick_bricklet/XYZ/released
+	publish '{"register": true}' to tinkerforge/register/joystick_bricklet/XYZ/released # Register released callback

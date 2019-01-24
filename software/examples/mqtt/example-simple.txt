@@ -1,0 +1,8 @@
+
+
+# Change XYZ to the UID of your Joystick Bricklet
+
+setup:
+	# Get current position
+	subscribe to tinkerforge/response/joystick/XYZ/get_position
+	publish '' to tinkerforge/request/joystick_bricklet/XYZ/get_position 
