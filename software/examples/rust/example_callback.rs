@@ -18,7 +18,7 @@ fn main() -> Result<(), Box<dyn Error>> {
     // This thread ends when the `j` object
     // is dropped, so there is no need for manual cleanup.
     thread::spawn(move || {
-        for pressed in pressed_receiver {
+        for _pressed in pressed_receiver {
             println!("Pressed");
         }
     });
@@ -29,7 +29,7 @@ fn main() -> Result<(), Box<dyn Error>> {
     // This thread ends when the `j` object
     // is dropped, so there is no need for manual cleanup.
     thread::spawn(move || {
-        for released in released_receiver {
+        for _released in released_receiver {
             println!("Released");
         }
     });
