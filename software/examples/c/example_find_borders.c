@@ -48,7 +48,7 @@ int main(void) {
 	// Register position reached callback to function cb_position_reached
 	joystick_register_callback(&j,
 	                           JOYSTICK_CALLBACK_POSITION_REACHED,
-	                           (void *)cb_position_reached,
+	                           (void (*)(void))cb_position_reached,
 	                           NULL);
 
 	// Configure threshold for position "outside of -99, -99 to 99, 99"

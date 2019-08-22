@@ -71,13 +71,13 @@ int main(void) {
 	// Register pressed callback to function cb_pressed
 	joystick_register_callback(&j,
 	                           JOYSTICK_CALLBACK_PRESSED,
-	                           (void *)cb_pressed,
+	                           (void (*)(void))cb_pressed,
 	                           NULL);
 
 	// Register released callback to function cb_released
 	joystick_register_callback(&j,
 	                           JOYSTICK_CALLBACK_RELEASED,
-	                           (void *)cb_released,
+	                           (void (*)(void))cb_released,
 	                           NULL);
 
 	printf("Press ctrl+c to exit\n");
