@@ -29,5 +29,5 @@ if __name__ == "__main__":
     # Register released callback to function cb_released
     j.register_callback(j.CALLBACK_RELEASED, cb_released)
 
-    raw_input("Press key to exit\n") # Use input() in Python 3
+    input("Press key to exit\n") # Use raw_input() in Python 2
     ipcon.disconnect()
