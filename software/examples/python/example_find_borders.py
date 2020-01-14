@@ -38,5 +38,5 @@ if __name__ == "__main__":
     # Configure threshold for position "outside of -99, -99 to 99, 99"
     j.set_position_callback_threshold("o", -99, 99, -99, 99)
 
-    raw_input("Press key to exit\n") # Use input() in Python 3
+    input("Press key to exit\n") # Use raw_input() in Python 2
     ipcon.disconnect()
