@@ -11,7 +11,7 @@
 
 #define HOST "localhost"
 #define PORT 4223
-#define UID "XYZ" // Change to your UID
+#define UID "XYZ" // Change XYZ to the UID of your Joystick Bricklet
 
 // Fake a mouse button event
 void send_mouse_button(uint32_t event) {
