@@ -6,20 +6,24 @@ setup:
 
 	# Handle incoming position reached callbacks
 	subscribe to tinkerforge/callback/joystick_bricklet/XYZ/position_reached
-        if a message arrives
-            # message contains x and y as int
-            if y == 100
-                print "Top"
-            elseif y == -100
-                print "Bottom"
-            elseif x == 100
-                print "Right"
-            elseif x == -100
-                print "Left"
-            endif           
-            print "\n"
+		if a message arrives
+			# message contains x and y as int
+			if y == 100
+				print "Top"
+			elseif y == -100
+				print "Bottom"
+			endif
+
+			if x == 100
+				print "Right"
+			elseif x == -100
+				print "Left"
+			endif
+
+			print "\n"
+		endif
 	endsubscribe
-	
+
 	publish '{"register": true}' to tinkerforge/register/joystick_bricklet/XYZ/position_reached # Register position_reached callback
 
 	# Configure threshold for position "outside of -99, -99 to 99, 99"
