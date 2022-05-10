@@ -21,8 +21,8 @@ func main() {
 	// Get current position.
 	x, y, _ := j.GetPosition()
 
-	fmt.Printf("Position [X]: \n", x)
-	fmt.Printf("Position [Y]: \n", y)
+	fmt.Printf("Position [X]: %d\n", x)
+	fmt.Printf("Position [Y]: %d\n", y)
 
 	fmt.Print("Press enter to exit.")
 	fmt.Scanln()
